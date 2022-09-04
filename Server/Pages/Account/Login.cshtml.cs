@@ -1,10 +1,12 @@
 ﻿using Application.AccountApp;
+using Domain.UserAgg;
 using Infrastructure;
 using Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Server.Pages.Account
 {
@@ -46,8 +48,6 @@ namespace Server.Pages.Account
             // **************************************************
             var user = new Domain.UserAgg.User();
 
-            //if ((ViewModel.Username == "Admin") &&
-            //    (ViewModel.Password == "Admin"))
             if ((ViewModel.Username == _applicationSettings.AdminUserPass.Username) &&
                  (ViewModel.Password == _applicationSettings.AdminUserPass.Password))
             {
@@ -74,98 +74,29 @@ namespace Server.Pages.Account
 
             }
             var claims =
-                new List<System.Security.Claims.Claim>();
+                new List<Claim>();
 
-            System.Security.Claims.Claim claim;
+            Claim claim;
 
-            // **************************************************
-            claim =
-                new System.Security.Claims.Claim
-                (type: "FullName", value: string.Concat(user.FirstName, " ", user.LastName));
+            claim = GetUserClaims(user, claims);
 
-            claims.Add(item: claim);
-            // **************************************************
-
-            // **************************************************
-            //claim =
-            //	new System.Security.Claims.Claim
-            //	(type: "Role", value: "Admin");
-
-            claim =
-                new System.Security.Claims.Claim
-                (type: System.Security.Claims.ClaimTypes.Role, value: user.Role ?? "User");
-
-            claims.Add(item: claim);
-            // **************************************************
-
-            // **************************************************
-            //claim =
-            //	new System.Security.Claims.Claim
-            //	(type: "Username", value: "Dariush");
-
-            claim =
-                new System.Security.Claims.Claim
-                (type: System.Security.Claims.ClaimTypes.Name, value: user.Username);
-
-            claims.Add(item: claim);
-            // **************************************************
-
-            // **************************************************
-            claim =
-                new System.Security.Claims.Claim
-                (type: System.Security.Claims.ClaimTypes.Email, value: user.EmailAddress);
-
-            claims.Add(item: claim);
-            // **************************************************
-            // **************************************************
-            // **************************************************
-
-            // **************************************************
-            // **************************************************
-            // **************************************************
             var claimsIdentity =
-                new System.Security.Claims.ClaimsIdentity(claims: claims,
+                new ClaimsIdentity(claims: claims,
                 authenticationType: Infrastructure.Security.Utility.AuthenticationScheme);
-            // **************************************************
-            // **************************************************
-            // **************************************************
-
-            // **************************************************
-            // **************************************************
-            // **************************************************
-            //var claimsPrincipal =
-            //	new System.Security.Claims.ClaimsPrincipal();
-
-            //claimsPrincipal.AddIdentity(identity: claimsIdentity);
 
             var claimsPrincipal =
-                new System.Security.Claims.ClaimsPrincipal(identity: claimsIdentity);
-            // **************************************************
-            // **************************************************
-            // **************************************************
+                new ClaimsPrincipal(identity: claimsIdentity);
 
-            // **************************************************
-            // **************************************************
-            // **************************************************
             var authenticationProperties =
                 new AuthenticationProperties
                 {
                     IsPersistent = ViewModel.RememberMe,
                 };
-            // **************************************************
-            // **************************************************
-            // **************************************************
 
-            // **************************************************
-            // **************************************************
-            // **************************************************
-            // SignInAsync -> using Microsoft.AspNetCore.Authentication;
             await HttpContext.SignInAsync
                 (scheme: Infrastructure.Security.Utility.AuthenticationScheme,
                 principal: claimsPrincipal, properties: authenticationProperties);
-            // **************************************************
-            // **************************************************
-            // **************************************************
+
 
             if (string.IsNullOrWhiteSpace(ReturnUrl))
             {
@@ -175,6 +106,39 @@ namespace Server.Pages.Account
             {
                 return Redirect(url: ReturnUrl);
             }
+        }
+
+        private static Claim GetUserClaims(User user, List<Claim> claims)
+        {
+            // **************************************************
+            Claim claim = new Claim
+                (type: "FullName", value: string.Concat(user.FirstName, " ", user.LastName));
+            claims.Add(item: claim);
+            // **************************************************
+
+            // **************************************************
+            claim =
+                new Claim
+                (type: ClaimTypes.Role, value: user.Role ?? "User");
+
+            claims.Add(item: claim);
+            // **************************************************
+
+            // **************************************************
+            claim =
+                new Claim
+                (type: ClaimTypes.Name, value: user.Username);
+
+            claims.Add(item: claim);
+            // **************************************************
+
+            // **************************************************
+            claim =
+                new Claim
+                (type: ClaimTypes.Email, value: user.EmailAddress);
+
+            claims.Add(item: claim);
+            return claim;
         }
     }
 }
