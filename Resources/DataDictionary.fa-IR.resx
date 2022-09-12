@@ -385,7 +385,7 @@
     <value>تنظیمات</value>
   </data>
   <data name="SiteAuthor" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="Sites" xml:space="preserve">
     <value>سایت‌ها</value>
@@ -473,5 +473,8 @@
   </data>
   <data name="LastLoginDateTime" xml:space="preserve">
     <value>زمان آخرین ورود به سامانه</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>پیشخان</value>
   </data>
 </root>

@@ -8,6 +8,7 @@ namespace Persistence
 		public DbSet<User> Users { get; set; }
 		public DatabaseContext(DbContextOptions options) : base(options)
 		{
+			Database.EnsureCreated();	
 		}
 
 	}

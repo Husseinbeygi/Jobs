@@ -34,4 +34,28 @@
 	  <Folder Include="Documents\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Content Update="Pages\Shared\PartialViews\Admin\Rtl\_Scripts.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="Pages\Shared\PartialViews\Admin\Rtl\_StyleSheets.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Pages\Shared\PartialViews\Admin\Rtl\_Footer.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Pages\Shared\PartialViews\Admin\Rtl\_Footer.cshtml" />
+	  <_ContentIncludedByDefault Remove="Pages\Shared\PartialViews\Admin\Rtl\_Header.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Pages\Shared\PartialViews\Admin\Rtl\_Header.cshtml" />
+	</ItemGroup>
+
 </Project>

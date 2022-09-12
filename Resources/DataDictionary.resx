@@ -388,10 +388,10 @@
     <value>Settings</value>
   </data>
   <data name="SiteAuthor" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteTitle" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SocialNetworks" xml:space="preserve">
     <value>Social Networks</value>
@@ -470,5 +470,8 @@
   </data>
   <data name="LastLoginDateTime" xml:space="preserve">
     <value>Last Login Date Time</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
   </data>
 </root>
