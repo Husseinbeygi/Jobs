@@ -1,7 +1,7 @@
 ﻿namespace Infrastructure.TagHelpers
 {
 	[Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement
-		(tag: "input",
+		(tag: "textarea",
 		ParentTag = "section-form-field")]
 	public class SectionFormFieldTextArea :
 		Microsoft.AspNetCore.Mvc.TagHelpers.TextAreaTagHelper
