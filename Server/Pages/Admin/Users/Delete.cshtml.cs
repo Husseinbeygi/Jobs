@@ -24,16 +24,11 @@ public class DeleteModel : Infrastructure.BasePageModel
 		ViewModel = new();
 	}
 
-	// **********
 	private ILogger<DeleteModel> Logger { get; }
 	public IUserApplication UserApplication { get; }
 
-	// **********
-
-	// **********
 	[BindProperty]
 	public DetailsViewModel ViewModel { get; private set; }
-	// **********
 
 	public async Task<IActionResult> OnGetAsync(Guid? id)
 	{
@@ -100,7 +95,7 @@ public class DeleteModel : Infrastructure.BasePageModel
 
 			var successMessage = string.Format
 				(Resources.Messages.Successes.Deleted,
-				Resources.DataDictionary.Role);
+				Resources.DataDictionary.User);
 
 			AddToastSuccess(message: successMessage);
 
