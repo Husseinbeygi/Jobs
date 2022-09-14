@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using static Infrastructure.Constants;
 
 namespace Server.Pages.Account
 {
@@ -46,20 +47,18 @@ namespace Server.Pages.Account
 
 
             // **************************************************
-            var user = new Domain.UserAgg.User();
+            var user = new User("Admin@domain.local");
 
             if ((ViewModel.Username == _applicationSettings.AdminUserPass.Username) &&
                  (ViewModel.Password == _applicationSettings.AdminUserPass.Password))
             {
-                user = new Domain.UserAgg.User
+                user = new User("Admin@domain.local")
                 {
-                    FirstName = "مدیر",
-                    LastName = "سیستم",
-                    EmailAddress = "Admin@domain.local",
+                    FullName = "مدیر سیستم",
                     Username = "Admin",
-                    Role = "Admin"
-                };
-            }
+                    Role = Role.Admin
+				};
+            }   
             else
             {
                 user = await _accountApplication.AuthenticateUser(ViewModel);
@@ -67,7 +66,7 @@ namespace Server.Pages.Account
                 if (user == null)
                 {
                     AddPageError(message:
-                        "نام کاربری و رمز عبور اشتباه است");
+                        Resources.Messages.Errors.CurrentPasswordIsNotCorrect);
 
                     return Page();
                 }
@@ -112,7 +111,7 @@ namespace Server.Pages.Account
         {
             // **************************************************
             Claim claim = new Claim
-                (type: "FullName", value: string.Concat(user.FirstName, " ", user.LastName));
+                (type: "FullName", value: string.Concat(user.FullName));
             claims.Add(item: claim);
             // **************************************************
 

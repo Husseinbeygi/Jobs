@@ -1,6 +1,9 @@
-﻿namespace Domain.SeedWork
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.SeedWork
 {
-	public abstract class Entity : object, IEntity
+	public abstract class Entity : object, IEntity<Guid>
 	{
 		public Entity() : base()
 		{
@@ -14,21 +17,13 @@
 		}
 
 		// **********
-		[System.ComponentModel.DataAnnotations.Display
-			(ResourceType = typeof(Resources.DataDictionary),
-			Name = nameof(Resources.DataDictionary.Id))]
-
-		[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
-			(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+		[DatabaseGenerated
+			(DatabaseGeneratedOption.None)]
 		public System.Guid Id { get; protected set; }
 		// **********
 
 		// **********
-		[System.ComponentModel.DataAnnotations.Display
-			(ResourceType = typeof(Resources.DataDictionary),
-			Name = nameof(Resources.DataDictionary.Ordering))]
-
-		[System.ComponentModel.DataAnnotations.Range
+		[Range
 			(minimum: 1, maximum: 100_000,
 			ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 			ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
@@ -36,12 +31,12 @@
 		// **********
 
 		// **********
-		[System.ComponentModel.DataAnnotations.Display
+		[Display
 			(ResourceType = typeof(Resources.DataDictionary),
 			Name = nameof(Resources.DataDictionary.InsertDateTime))]
 
-		[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
-			(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+		[DatabaseGenerated
+			(DatabaseGeneratedOption.None)]
 		public System.DateTime InsertDateTime { get; private set; }
 		// **********
 	}

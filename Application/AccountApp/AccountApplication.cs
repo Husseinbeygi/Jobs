@@ -3,6 +3,7 @@ using Domain.UserAgg;
 using Framework.OperationResult;
 using Framework.Password;
 using ViewModels.Pages.Account;
+using ViewModels.Pages.Admin.Users;
 
 namespace Application.AccountApp
 {
@@ -20,17 +21,14 @@ namespace Application.AccountApp
 
 		public async Task<OperationResult> RegisterUser(RegisterViewModel model)
 		{
-			return await _userApplication.AddUser(new User
+			return await _userApplication.AddUser(
+				new CreateViewModel
 			{
-				FirstName = model.FirstName,
-				LastName = model.LastName,
-				EmailAddress = model.EmailAddress,
+				FullName = model.FullName,
 				Password = model.Password,
-				Username = model.Username,
+				Username = model?.Username,
+				EmailAddress = model.EmailAddress,
 				IsActive = true,
-				IsDeletable = true,
-				IsUpdatable = true,
-
 			});
 		}
 

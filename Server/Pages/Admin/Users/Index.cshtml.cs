@@ -2,6 +2,9 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using ViewModels.Pages.Admin.Users;
+using System.Collections.Generic;
+using Application.UserApp;
 
 namespace Server.Pages.Admin.Users;
 
@@ -9,33 +12,21 @@ namespace Server.Pages.Admin.Users;
 	(Roles = Infrastructure.Constants.Role.Admin)]
 public class IndexModel : Infrastructure.BasePageModel
 {
-	#region Constructor(s)
-	public IndexModel(ILogger<IndexModel> logger) 
+	public IndexModel(ILogger<IndexModel> logger,
+		IUserApplication userApplication)
 	{
 		Logger = logger;
-
-		ViewModel =
-			new System.Collections.Generic.List
-			<ViewModels.Pages.Admin.Users.IndexItemViewModel>();
+		UserApplication = userApplication;
+		ViewModel = new List<DetailsViewModel>();
 	}
-	#endregion /Constructor(s)
 
-	#region Property(ies)
-	// **********
-	private Microsoft.Extensions.Logging.ILogger<IndexModel> Logger { get; }
-	// **********
+	private ILogger<IndexModel> Logger { get; }
+	public IUserApplication UserApplication { get; }
+	public IList<DetailsViewModel> ViewModel { get; private set; }
 
-	// **********
-	public System.Collections.Generic.IList
-		<ViewModels.Pages.Admin.Users.IndexItemViewModel> ViewModel
-	{ get; private set; }
-	// **********
-	#endregion /Property(ies)
 
-	#region OnGetAsync
 	public async Task OnGetAsync()
 	{
-
+		ViewModel = (await UserApplication.GetAllUsers()).Data;
 	}
-	#endregion /OnGetAsync
 }

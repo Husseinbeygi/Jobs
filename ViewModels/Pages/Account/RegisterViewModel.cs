@@ -20,25 +20,9 @@
             ErrorMessageResourceType = typeof(Resources.Messages.Validations),
             ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
 
-        public string FirstName { get; set; }
+        public string FullName { get; set; }
         // **********
 
-        // **********
-        [System.ComponentModel.DataAnnotations.Display
-            (Name = nameof(Resources.DataDictionary.LastName),
-            ResourceType = typeof(Resources.DataDictionary))]
-
-        [System.ComponentModel.DataAnnotations.Required
-            (AllowEmptyStrings = false,
-            ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-            ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-
-        [System.ComponentModel.DataAnnotations.MaxLength
-            (length: Domain.SeedWork.Constants.MaxLength.LastName,
-            ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-            ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-        public string LastName { get; set; }
-        // **********
 
         // **********
         [System.ComponentModel.DataAnnotations.Display

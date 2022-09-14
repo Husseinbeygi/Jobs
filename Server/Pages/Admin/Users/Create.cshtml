@@ -22,6 +22,24 @@
 			<partial name="PartialViews/_DisplayPageMessages" />
 
 			<section-form-field>
+				<label asp-for="ViewModel.FullName"></label>
+				<input asp-for="ViewModel.FullName" />
+				<span asp-validation-for="ViewModel.FullName"></span>
+			</section-form-field>
+
+			<section-form-field>
+				<label asp-for="ViewModel.Username"></label>
+				<input asp-for="ViewModel.Username" />
+				<span asp-validation-for="ViewModel.Username"></span>
+			</section-form-field>
+
+			<section-form-field>
+				<label asp-for="ViewModel.CellPhoneNumber"></label>
+				<input asp-for="ViewModel.CellPhoneNumber" />
+				<span asp-validation-for="ViewModel.CellPhoneNumber"></span>
+			</section-form-field>
+
+			<section-form-field>
 				<label asp-for="ViewModel.EmailAddress"></label>
 				<input asp-for="ViewModel.EmailAddress" />
 				<span asp-validation-for="ViewModel.EmailAddress"></span>

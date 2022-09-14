@@ -1,8 +1,8 @@
 ﻿namespace ViewModels.Pages.Admin.Users;
 
-public class DetailsOrDeleteViewModel : UpdateViewModel
+public class DetailsViewModel : UpdateViewModel
 {
-	public DetailsOrDeleteViewModel() : base()
+	public DetailsViewModel() : base()
 	{
 	}
 
@@ -43,15 +43,23 @@ public class DetailsOrDeleteViewModel : UpdateViewModel
 
 	// **********
 	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Username))]
-	public string? Username { get; init; }
+		(Name = nameof(Resources.DataDictionary.IsSystemic),
+		ResourceType = typeof(Resources.DataDictionary))]
+	public bool IsSystemic { get; init; }
 	// **********
 
 	// **********
 	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.FullName))]
-	public string? FullName { get; init; }
+		(Name = nameof(Resources.DataDictionary.UpdateDateTime),
+		ResourceType = typeof(Resources.DataDictionary))]
+	public System.DateTime? UpdateDateTime { get; init; }
+	// **********
+
+	// **********
+	[System.ComponentModel.DataAnnotations.Display
+		(Name = nameof(Resources.DataDictionary.InsertDateTime),
+		ResourceType = typeof(Resources.DataDictionary))]
+	public System.DateTime? InsertDateTime { get; init; }
 	// **********
 }
+

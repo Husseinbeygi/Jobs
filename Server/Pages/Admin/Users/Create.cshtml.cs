@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using Application.UserApp;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using ViewModels.Pages.Admin.Users;
+using ViewModels.Shared;
 
 namespace Server.Pages.Admin.Users;
 
@@ -10,10 +13,11 @@ namespace Server.Pages.Admin.Users;
 public class CreateModel : Infrastructure.BasePageModel
 {
 	#region Constructor(s)
-	public CreateModel(ILogger<CreateModel> logger)
+	public CreateModel(ILogger<CreateModel> logger,
+		IUserApplication userApplication)
 	{
 		Logger = logger;
-
+		UserApplication = userApplication;
 		ViewModel = new();
 
 		RolesViewModel =
@@ -24,18 +28,20 @@ public class CreateModel : Infrastructure.BasePageModel
 
 	#region Property(ies)
 	// **********
-	private Microsoft.Extensions.Logging.ILogger<CreateModel> Logger { get; }
+	private ILogger<CreateModel> Logger { get; }
+	public IUserApplication UserApplication { get; }
+
 	// **********
 
 	// **********
-	public System.Collections.Generic.IList
-		<ViewModels.Shared.KeyValueViewModel> RolesViewModel
+	public IList
+		<KeyValueViewModel> RolesViewModel
 	{ get; private set; }
 	// **********
 
 	// **********
-	[Microsoft.AspNetCore.Mvc.BindProperty]
-	public ViewModels.Pages.Admin.Users.CreateViewModel ViewModel { get; set; }
+	[BindProperty]
+	public CreateViewModel ViewModel { get; set; }
 	// **********
 	#endregion /Property(ies)
 
@@ -46,8 +52,33 @@ public class CreateModel : Infrastructure.BasePageModel
 	#endregion /OnGetAsync
 
 	#region OnPostAsync
-	public async Task OnPostAsync()
+	public async Task<IActionResult> OnPostAsync()
 	{
+		if (ModelState.IsValid == false)
+		{
+			return Page();
+		}
+
+		var res = await UserApplication.AddUser(ViewModel);
+
+		if (res.Succeeded)
+		{
+			var successMessage = string.Format
+				(format: Resources.Messages.Successes.Created,
+				arg0: Resources.DataDictionary.User);
+
+			AddToastSuccess(message: successMessage);
+
+			return RedirectToPage("Index");
+		}
+
+		foreach (var error in res.ErrorMessages)
+		{
+			AddToastError(error);
+		}
+
+		return Page();
+
 	}
 	#endregion OnPostAsync
 

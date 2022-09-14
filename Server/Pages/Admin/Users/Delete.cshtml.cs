@@ -2,6 +2,13 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using ViewModels.Pages.Admin.Users;
+using Application.UserApp;
+using System;
+using Domain.SeedWork;
+using Persistence;
+using System.Resources;
 
 namespace Server.Pages.Admin.Users;
 
@@ -9,35 +16,107 @@ namespace Server.Pages.Admin.Users;
 	(Roles = Infrastructure.Constants.Role.Admin)]
 public class DeleteModel : Infrastructure.BasePageModel
 {
-	#region Constructor(s)
-	public DeleteModel(ILogger<DeleteModel> logger)
+	public DeleteModel(ILogger<DeleteModel> logger,
+		IUserApplication userApplication)
 	{
 		Logger = logger;
-
+		UserApplication = userApplication;
 		ViewModel = new();
 	}
-	#endregion /Constructor(s)
-
-	#region Porperty(ies)
-	// **********
-	private Microsoft.Extensions.Logging.ILogger<DeleteModel> Logger { get; }
-	// **********
 
 	// **********
-	[Microsoft.AspNetCore.Mvc.BindProperty]
-	public ViewModels.Pages.Admin.Users.DetailsOrDeleteViewModel ViewModel { get; private set; }
-	// **********
-	#endregion /Porperty(ies)
+	private ILogger<DeleteModel> Logger { get; }
+	public IUserApplication UserApplication { get; }
 
-	#region OnGetAsync
-	public async Task OnGetAsync()
+	// **********
+
+	// **********
+	[BindProperty]
+	public DetailsViewModel ViewModel { get; private set; }
+	// **********
+
+	public async Task<IActionResult> OnGetAsync(Guid? id)
 	{
-	}
-	#endregion /OnGetAsync
+		try
+		{
+			if (id.HasValue == false)
+			{
+				AddToastError
+					(message: Resources.Messages.Errors.IdIsNull);
 
-	#region OnPostAsync
-	public async Task OnPostAsync()
-	{
+				return RedirectToPage(pageName: "Index");
+			}
+
+			ViewModel = (await UserApplication.GetUser(id.Value)).Data;
+
+			if (ViewModel == null)
+			{
+				AddToastError
+					(message: Resources.Messages.Errors.ThereIsNotAnyDataWithThisId);
+
+				return RedirectToPage(pageName: "Index");
+			}
+
+			return Page();
+		}
+		catch (System.Exception ex)
+		{
+			Logger.LogError
+				(message: Constants.Logger.ErrorMessage, args: ex.Message);
+
+			AddToastError
+				(message: Resources.Messages.Errors.UnexpectedError);
+
+			return RedirectToPage(pageName: "Index");
+		}
+
 	}
-	#endregion /OnPostAsync
+
+	public async Task<IActionResult> OnPostAsync(Guid? id)
+	{
+		if (id.HasValue == false)
+		{
+			AddToastError
+				(message: Resources.Messages.Errors.IdIsNull);
+
+			return RedirectToPage(pageName: "Index");
+		}
+
+		try
+		{
+
+			var res = (await UserApplication.DeleteUser(id.Value));
+
+			if (res.Succeeded == false ||
+				res.ErrorMessages.Count() > 0)
+			{
+				foreach (var item in res.ErrorMessages)
+				{
+					AddToastError(item);
+				}
+
+				return Page();
+			}
+
+			var successMessage = string.Format
+				(Resources.Messages.Successes.Deleted,
+				Resources.DataDictionary.Role);
+
+			AddToastSuccess(message: successMessage);
+
+			return RedirectToPage(pageName: "Index");
+
+		}
+		catch (System.Exception ex)
+		{
+			Logger.LogError
+				(message: Constants.Logger.ErrorMessage, args: ex.Message);
+
+			AddToastError
+				(message: Resources.Messages.Errors.UnexpectedError);
+
+			return RedirectToPage(pageName: "Index");
+		}
+
+	}
 }

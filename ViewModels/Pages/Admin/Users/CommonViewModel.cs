@@ -6,6 +6,31 @@ public class CommonViewModel : object
 	{
 	}
 
+
+	// **********
+	[System.ComponentModel.DataAnnotations.Display
+	(Name = nameof(Resources.DataDictionary.Username),
+	ResourceType = typeof(Resources.DataDictionary))]
+
+	[System.ComponentModel.DataAnnotations.Required
+	(AllowEmptyStrings = false,
+	ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+	ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public string Username { get; set; }
+	// **********
+
+	// **********
+	[System.ComponentModel.DataAnnotations.Display
+	(Name = nameof(Resources.DataDictionary.FullName),
+	ResourceType = typeof(Resources.DataDictionary))]
+
+	[System.ComponentModel.DataAnnotations.Required
+	(AllowEmptyStrings = false,
+	ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+	ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public string FullName { get; set; }
+	// **********
+
 	// **********
 	[System.ComponentModel.DataAnnotations.Display
 		(Name = nameof(Resources.DataDictionary.EmailAddress),

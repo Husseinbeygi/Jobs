@@ -29,6 +29,18 @@
 			</section-form-field>
 
 			<section-form-field>
+				<label asp-for="ViewModel.Username"></label>
+				<input asp-for="ViewModel.Username" />
+				<span asp-validation-for="ViewModel.Username"></span>
+			</section-form-field>
+
+			<section-form-field>
+				<label asp-for="ViewModel.FullName"></label>
+				<input asp-for="ViewModel.FullName" />
+				<span asp-validation-for="ViewModel.FullName"></span>
+			</section-form-field>
+
+			<section-form-field>
 				<label asp-for="ViewModel.RoleId"></label>
 
 				<select class="form-select" asp-for="ViewModel.RoleId"

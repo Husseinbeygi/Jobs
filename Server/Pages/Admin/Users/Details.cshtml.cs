@@ -2,6 +2,11 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using ViewModels.Pages.Admin.Users;
+using Application.UserApp;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using Domain.SeedWork;
 
 namespace Server.Pages.Admin.Users;
 
@@ -9,28 +14,58 @@ namespace Server.Pages.Admin.Users;
 	(Roles = Infrastructure.Constants.Role.Admin)]
 public class DetailsModel : Infrastructure.BasePageModel
 {
-	#region Constructor(s)
-	public DetailsModel(ILogger<DetailsModel> logger)
+	public DetailsModel(ILogger<DetailsModel> logger,
+		IUserApplication userApplication)
 	{
 		Logger = logger;
-
+		UserApplication = userApplication;
 		ViewModel = new();
 	}
-	#endregion /Constructor(s)
-
-	#region Property(ies)
-	// **********
-	private Microsoft.Extensions.Logging.ILogger<DetailsModel> Logger { get; }
-	// **********
 
 	// **********
-	public ViewModels.Pages.Admin.Users.DetailsOrDeleteViewModel ViewModel { get; private set; }
-	// **********
-	#endregion /Property(ies)
+	private ILogger<DetailsModel> Logger { get; }
+	public IUserApplication UserApplication { get; }
 
-	#region OnGetAsync
-	public async Task OnGetAsync()
+	// **********
+
+	// **********
+	public DetailsViewModel ViewModel { get; private set; }
+	// **********
+
+	public async Task<IActionResult> OnGetAsync(Guid? id)
 	{
+		try
+		{
+			if (id.HasValue == false)
+			{
+				AddToastError
+					(message: Resources.Messages.Errors.IdIsNull);
+
+				return RedirectToPage(pageName: "Index");
+			}
+
+			ViewModel = (await UserApplication.GetUser(id.Value)).Data;
+
+			if (ViewModel == null)
+			{
+				AddToastError
+					(message: Resources.Messages.Errors.ThereIsNotAnyDataWithThisId);
+
+				return RedirectToPage(pageName: "Index");
+			}
+
+			return Page();
+		}
+		catch (System.Exception ex)
+		{
+			Logger.LogError
+				(message: Constants.Logger.ErrorMessage, args: ex.Message);
+
+			AddToastError
+				(message: Resources.Messages.Errors.UnexpectedError);
+
+			return RedirectToPage(pageName: "Index");
+		}
+
 	}
-	#endregion /OnGetAsync
 }

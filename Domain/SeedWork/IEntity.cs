@@ -1,9 +1,9 @@
 ﻿namespace Domain.SeedWork
 {
-	public interface IEntity
+	public interface IEntity<T>
 	{
 		// **********
-		public System.Guid Id { get; }
+		public T Id { get; }
 		// **********
 
 		// **********
@@ -11,7 +11,7 @@
 		// **********
 
 		// **********
-		public System.DateTime InsertDateTime { get; }
+		public DateTime InsertDateTime { get; }
 		// **********
 	}
 }
