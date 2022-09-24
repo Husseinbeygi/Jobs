@@ -68,6 +68,7 @@
             public const int FirstName = 50;
             public const int LastName = 50;
 
+			public const int Comment = 4000;
         }
 
         /// <summary>
