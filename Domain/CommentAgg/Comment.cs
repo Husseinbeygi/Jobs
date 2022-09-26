@@ -45,10 +45,8 @@ public class Comment : Entity
 		UpdateDateTime =
 			Utility.Now;
 	}
-	public void UserId(Guid userId)
-	{
-		Id = userId;
-	}
+	
+	public Guid UserId { get; set; }
 
 	public User User { get; set; }
 	
