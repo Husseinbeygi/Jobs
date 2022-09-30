@@ -498,4 +498,10 @@
   <data name="OwnerId" xml:space="preserve">
     <value>کد فروشنده</value>
   </data>
+  <data name="Jobs" xml:space="preserve">
+    <value>مشاغل</value>
+  </data>
+  <data name="Job" xml:space="preserve">
+    <value>شغل</value>
+  </data>
 </root>

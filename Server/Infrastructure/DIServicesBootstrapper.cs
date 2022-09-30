@@ -1,5 +1,7 @@
 ﻿using Application.AccountApp;
+using Application.JobApp;
 using Application.UserApp;
+using Domain.JobAgg;
 using Domain.UserAgg;
 using Framework.Password;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +17,10 @@ namespace Infrastructure
             services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddTransient<IAccountApplication, AccountApplication>();
-            services.AddTransient<IPasswordHasher,PasswordHasher>();    
+            services.AddTransient<IPasswordHasher,PasswordHasher>();
+
+            services.AddTransient<IJobApplication, JobApplication>();
+            services.AddTransient<IJobRepository, JobRepository>();
         }
     }
 }

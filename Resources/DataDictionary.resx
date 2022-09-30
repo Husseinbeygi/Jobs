@@ -495,4 +495,10 @@
   <data name="OwnerId" xml:space="preserve">
     <value>OwnerId</value>
   </data>
+  <data name="Jobs" xml:space="preserve">
+    <value>Jobs</value>
+  </data>
+  <data name="Job" xml:space="preserve">
+    <value>Job</value>
+  </data>
 </root>

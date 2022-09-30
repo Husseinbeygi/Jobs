@@ -1,0 +1,118 @@
+﻿@page
+@model Server.Pages.Admin.Jobs.IndexModel
+@{
+    var pageTitle =
+	$"{Resources.ButtonCaptions.ListOf} {Resources.DataDictionary.Jobs}";
+
+	ViewData[Infrastructure.ViewDataKeyNames.PageTitle] = pageTitle;
+
+	Layout = "Layouts/Admin/Rtl/_Layout";
+}
+
+<section-page-header>
+	@(pageTitle)
+</section-page-header>
+
+<section-page-actions>
+	<a asp-page="Create">
+		@(Html.DtatGetLinkCaptionForCreate())
+	</a>
+</section-page-actions>
+
+<section-table>
+	<table>
+		<caption>
+			@(pageTitle)
+		</caption>
+
+		<thead>
+			<tr>
+				<th>
+					@(Resources.DataDictionary.RowNumber)
+				</th>
+
+				<th>
+				</th>
+
+				<th>
+					@(Resources.DataDictionary.JobName)
+				</th>
+
+				<th>
+					@(Resources.DataDictionary.IsVerified)
+				</th>
+
+				<th>
+					@(Resources.DataDictionary.CellPhoneNumber)
+				</th>
+
+				<th>
+					@(Resources.DataDictionary.IsActive)
+				</th>
+				
+				<th>
+					@(Resources.DataDictionary.Address)
+				</th>
+
+				<th>
+					@(Resources.DataDictionary.IsDeleted)
+				</th>
+
+				<th>
+					@(Resources.DataDictionary.InsertDateTime)
+				</th>
+
+				<th>
+					@(Resources.DataDictionary.UpdateDateTime)
+				</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@for (int index = 0; index <= Model.ViewModel.Count - 1; index++)
+			{
+				var item = Model.ViewModel[index];
+
+				<tr>
+					@(Html.DtatDisplayRowNumberWithTd(value: index + 1))
+
+					<table-actions>
+						<a asp-page="Details" asp-route-id="@(item.Id)">
+							@(Html.DtatGetIconDetails())
+						</a>
+						<a asp-page="Update" asp-route-id="@(item.Id)">
+							@(Html.DtatGetIconUpdate())
+						</a>
+
+						@if ((item.IsUndeletable == false) && (item.IsDeletable == false))
+						{
+							<a asp-page="Delete" asp-route-id="@(item.Id)">
+								@(Html.DtatGetIconDelete())
+							</a>
+						}
+					</table-actions>
+
+					<td>
+						@(item.Name)
+					</td>
+
+					<td>
+						@(item.PhoneNumber1)
+					</td>
+
+					@(Html.DtatDisplayBooleanWithTd(value: item.IsActive))
+
+					@(Html.DtatDisplayBooleanWithTd(value: item.IsVerified))
+
+					@(Html.DtatDisplayBooleanWithTd(value: item.IsDeletable))
+
+					@(Html.DtatDisplayBooleanWithTd(value: item.IsUndeletable))
+
+					@(Html.DtatDisplayDateTimeWithTd(value: item.InsertedDateTime))
+
+					@(Html.DtatDisplayDateTimeWithTd(value: item.UpdateDateTime))
+				</tr>
+			}
+		</tbody>
+	</table>
+</section-table>
