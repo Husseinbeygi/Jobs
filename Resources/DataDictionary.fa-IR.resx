@@ -477,4 +477,19 @@
   <data name="Dashboard" xml:space="preserve">
     <value>پیشخان</value>
   </data>
+  <data name="Address" xml:space="preserve">
+    <value>آدرس</value>
+  </data>
+  <data name="ClosingTime" xml:space="preserve">
+    <value>زمان بسته شدن</value>
+  </data>
+  <data name="JobName" xml:space="preserve">
+    <value>نام شغل</value>
+  </data>
+  <data name="OpeningTime" xml:space="preserve">
+    <value>زمان بازگشایی</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>امتیاز</value>
+  </data>
 </root>
