@@ -492,4 +492,10 @@
   <data name="Score" xml:space="preserve">
     <value>امتیاز</value>
   </data>
+  <data name="CategoryId" xml:space="preserve">
+    <value>کد دسته بندی</value>
+  </data>
+  <data name="OwnerId" xml:space="preserve">
+    <value>کد فروشنده</value>
+  </data>
 </root>

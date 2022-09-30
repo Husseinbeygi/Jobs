@@ -142,6 +142,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CategoryId.
+        /// </summary>
+        public static string CategoryId {
+            get {
+                return ResourceManager.GetString("CategoryId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cell Phone Number.
         /// </summary>
         public static string CellPhoneNumber {
@@ -795,6 +804,15 @@ namespace Resources {
         public static string Ordering {
             get {
                 return ResourceManager.GetString("Ordering", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OwnerId.
+        /// </summary>
+        public static string OwnerId {
+            get {
+                return ResourceManager.GetString("OwnerId", resourceCulture);
             }
         }
         

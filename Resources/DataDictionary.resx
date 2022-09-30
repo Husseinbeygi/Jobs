@@ -489,4 +489,10 @@
   <data name="Score" xml:space="preserve">
     <value>Score</value>
   </data>
+  <data name="CategoryId" xml:space="preserve">
+    <value>CategoryId</value>
+  </data>
+  <data name="OwnerId" xml:space="preserve">
+    <value>OwnerId</value>
+  </data>
 </root>
