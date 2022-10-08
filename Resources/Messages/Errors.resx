@@ -150,6 +150,9 @@
   <data name="ThereIsNotAnyDataWithThisId" xml:space="preserve">
     <value>There is not any data with this id!</value>
   </data>
+  <data name="ThereIsNotAnyDataWithThisName" xml:space="preserve">
+    <value>There is not any data with this Name!</value>
+  </data>
   <data name="UnableTo" xml:space="preserve">
     <value>We are unable to {0} this {1}!</value>
   </data>

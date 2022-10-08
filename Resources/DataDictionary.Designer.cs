@@ -133,6 +133,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cell Phone Number.
         /// </summary>
         public static string CellPhoneNumber {
@@ -480,6 +489,15 @@ namespace Resources {
         public static string IsDefault {
             get {
                 return ResourceManager.GetString("IsDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is Deletable.
+        /// </summary>
+        public static string IsDeletable {
+            get {
+                return ResourceManager.GetString("IsDeletable", resourceCulture);
             }
         }
         
@@ -1119,6 +1137,15 @@ namespace Resources {
         public static string Websites {
             get {
                 return ResourceManager.GetString("Websites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Without Parent.
+        /// </summary>
+        public static string WithoutParent {
+            get {
+                return ResourceManager.GetString("WithoutParent", resourceCulture);
             }
         }
         
