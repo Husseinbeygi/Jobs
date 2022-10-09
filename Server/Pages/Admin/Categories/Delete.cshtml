@@ -1,0 +1,71 @@
+﻿@page
+@model Server.Pages.Admin.Categories.DeleteModel
+@using Resources
+
+@{
+    var pageTitle = $"{ButtonCaptions.Delete} {DataDictionary.Category}";
+    ViewData[ViewDataKeyNames.PageTitle] = pageTitle;
+
+    Layout = "Layouts/Admin/Rtl/_Layout";
+}
+
+
+<section-form>
+    <fieldset disabled>
+        <section-form-header>
+            @(pageTitle)
+        </section-form-header>
+
+        <partial name="PartialViews/_DisplayPageMessages" />
+
+        <section-form-field>
+            <label asp-for="ViewModel.Id"></label>
+            <input asp-for="ViewModel.Id" />
+        </section-form-field>
+
+        <section-form-field>
+            <label asp-for="ViewModel.Name"></label>
+            <input asp-for="ViewModel.Name" />
+        </section-form-field>
+
+        <section-form-field>
+            <label asp-for="ViewModel.ParentName"></label>
+            <input asp-for="ViewModel.ParentName" />
+        </section-form-field>
+
+        <section-form-field>
+            <label asp-for="ViewModel.Ordering"></label>
+            <input asp-for="ViewModel.Ordering" />
+        </section-form-field>
+
+        <section-form-check>
+            <input asp-for="ViewModel.IsActive" />
+            <label asp-for="ViewModel.IsActive"></label>
+        </section-form-check>
+
+        <section-form-check>
+            <input asp-for="ViewModel.IsDeletable" />
+            <label asp-for="ViewModel.IsDeletable"></label>
+        </section-form-check>
+    </fieldset>
+
+    <form method="post">
+        <section-form-buttons>
+            <input type="hidden" asp-for="ViewModel.Id" />
+
+            <button-delete />
+        </section-form-buttons>
+    </form>
+
+    <section-form-footer>
+        <a asp-page="Index">
+            @(Html.DtatGetLinkCaptionForList())
+        </a>
+        <a asp-page="Details" asp-route-id="@(Model.ViewModel.Id)">
+            @(Html.DtatGetLinkCaptionForDetails())
+        </a>
+        <a asp-page="Update" asp-route-id="@(Model.ViewModel.Id)">
+            @(Html.DtatGetLinkCaptionForUpdate())
+        </a>
+    </section-form-footer>
+</section-form>

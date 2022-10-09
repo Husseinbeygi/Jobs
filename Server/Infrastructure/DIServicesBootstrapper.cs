@@ -1,5 +1,7 @@
 ﻿using Application.AccountApp;
+using Application.CategoryApp;
 using Application.UserApp;
+using Domain.CategoryAgg;
 using Domain.UserAgg;
 using Framework.Password;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +17,10 @@ namespace Infrastructure
             services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddTransient<IAccountApplication, AccountApplication>();
-            services.AddTransient<IPasswordHasher,PasswordHasher>();    
+            services.AddTransient<IPasswordHasher,PasswordHasher>();
+
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<ICategoryApplication, CategoryApplication>();
         }
     }
 }

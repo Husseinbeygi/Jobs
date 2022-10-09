@@ -223,6 +223,7 @@ public static class HtmlHelpers : object
 
 		var icon =
 			TagHelpers.Utility.GetIconCreate();
+		icon.AddCssClass("me-2");
 
 		var span =
 			new Microsoft.AspNetCore.Mvc
