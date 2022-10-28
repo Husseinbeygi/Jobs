@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using static Domain.SeedWork.Constants;
 
-namespace Domain.UserAgg;
+namespace Domain.CommentAgg;
 
 public class Comment : Entity
 {
