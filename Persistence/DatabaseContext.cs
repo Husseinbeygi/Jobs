@@ -1,4 +1,5 @@
 ﻿using Domain.UserAgg;
+using Domain.CommentAgg;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence

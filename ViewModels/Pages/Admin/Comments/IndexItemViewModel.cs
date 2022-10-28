@@ -23,7 +23,7 @@ public class IndexItemViewModel : object
 	[System.ComponentModel.DataAnnotations.Display
 		(Name = nameof(Resources.DataDictionary.Score),
 		ResourceType = typeof(Resources.DataDictionary))]
-	public string Score { get; init; }
+	public decimal Score { get; init; }
 
 	// **********
 	[System.ComponentModel.DataAnnotations.Display

@@ -1,5 +1,4 @@
 ﻿using Domain.CommentAgg;
-using Domain.UserAgg;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,11 +15,16 @@ namespace Persistence.Repositories
 		{
 			_context = context;
 		}
+		public async Task<IList<Comment>> GetAllAsync()
+		{
+			return await _context.Comments.ToListAsync();
 
-		public async Task<List<Comment>> GetByUserId(Guid userId)
+		}
+
+		public async Task<Comment> GetByUserId(Guid userId)
 		{
 			
-			return await _context.Comments.Where(x => x.UserId == userId).ToListAsync();
+			return await _context.Comments.FirstOrDefaultAsync(x => x.UserId == userId);
 
 		}
 	}

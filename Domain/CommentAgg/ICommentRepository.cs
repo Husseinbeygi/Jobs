@@ -1,4 +1,4 @@
-﻿using Domain.UserAgg;
+﻿using Domain.CommentAgg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,7 @@ namespace Domain.CommentAgg
 {
 	public interface ICommentRepository : IRepository<Guid, Comment>
 	{
-		Task<List<Comment>> GetByUserId(Guid userId);
+		Task<IList<Comment>> GetAllAsync();
+		Task<Comment> GetByUserId(Guid userId);
 	}
 }
