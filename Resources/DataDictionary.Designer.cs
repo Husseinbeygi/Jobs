@@ -511,6 +511,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is Edited.
+        /// </summary>
+        public static string IsEdited {
+            get {
+                return ResourceManager.GetString("IsEdited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is Email Address Verified.
         /// </summary>
         public static string IsEmailAddressVerified {

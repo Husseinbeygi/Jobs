@@ -489,4 +489,7 @@
   <data name="Review" xml:space="preserve">
     <value>نقد و بررسی</value>
   </data>
+  <data name="IsEdited" xml:space="preserve">
+    <value>ویرایش شده</value>
+  </data>
 </root>

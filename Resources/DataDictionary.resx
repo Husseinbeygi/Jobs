@@ -486,4 +486,7 @@
   <data name="Review" xml:space="preserve">
     <value>Review</value>
   </data>
+  <data name="IsEdited" xml:space="preserve">
+    <value>Is Edited</value>
+  </data>
 </root>
