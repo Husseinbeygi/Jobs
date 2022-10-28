@@ -477,4 +477,16 @@
   <data name="Dashboard" xml:space="preserve">
     <value>پیشخان</value>
   </data>
+  <data name="Comment" xml:space="preserve">
+    <value>نظر</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>نظرات</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>امتیاز</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>نقد و بررسی</value>
+  </data>
 </root>

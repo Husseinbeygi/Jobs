@@ -32,6 +32,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Documents\" />
+	  <Folder Include="Pages\Admin\Comments\" />
 	</ItemGroup>
 
 	<ItemGroup>
