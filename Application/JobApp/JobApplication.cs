@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Domain.JobAgg;
+using Domain.SeedWork;
 using Domain.UserAgg;
 using Framework.OperationResult;
 using Resources.Messages;
@@ -104,8 +105,10 @@ namespace Application.JobApp
             {
                 _data.Add(new DetailsViewModel
                 {
+                    Id = job.Id,
                     Name = job.Name,
                     Address = job.Address,
+                    Description = job.Description,
                     PhoneNumber1 = job.PhoneNumber1,
                     IsActive = job.IsActive,
                     IsDeletable = job.IsDeletable,
@@ -113,6 +116,8 @@ namespace Application.JobApp
                     ClosingTime = job.ClosingTime,
                     Score = job.Score,
                     IsVerified = job.IsVerified,
+                    InsertDateTime = job.InsertDateTime,
+                    UpdateDateTime = job.UpdateDateTime
                 });
             }
 
@@ -128,15 +133,22 @@ namespace Application.JobApp
 
             var _job = new DetailsViewModel
             {
+                Id = job.Id,
                 Name = job.Name,
                 Address = job.Address,
+                Description = job.Description,
                 PhoneNumber1 = job.PhoneNumber1,
+                PhoneNumber2 = job.PhoneNumber2,
+                CellPhoneNumber1 = job.CellPhoneNumber1,
+                CellPhoneNumber2 = job.CellPhoneNumber2,
                 IsActive = job.IsActive,
                 IsDeletable = job.IsDeletable,
                 OpeningTime = job.OpeningTime,
                 ClosingTime = job.ClosingTime,
                 Score = job.Score,
                 IsVerified = job.IsVerified,
+                InsertDateTime = job.InsertDateTime,
+                UpdateDateTime = job.UpdateDateTime
             };
 
             res.Data = _job;
