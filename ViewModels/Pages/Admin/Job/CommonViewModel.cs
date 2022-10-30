@@ -84,7 +84,7 @@ namespace ViewModels.Pages.Admin.Job
         [Required
         (ErrorMessageResourceType = typeof(Validations),
         ErrorMessageResourceName = nameof(Validations.Required))]
-        public DateTime OpeningTime { get; set; }
+        public TimeSpan OpeningTime { get; set; }
         // **********
 
         // **********
@@ -95,7 +95,7 @@ namespace ViewModels.Pages.Admin.Job
         [Required
         (ErrorMessageResourceType = typeof(Validations),
         ErrorMessageResourceName = nameof(Validations.Required))]
-        public DateTime ClosingTime { get; set; }
+        public TimeSpan ClosingTime { get; set; }
         // **********
 
         // **********

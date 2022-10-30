@@ -17,6 +17,7 @@ namespace Domain.JobAgg
     {
         public Job()
         {
+            UpdateDateTime = InsertDateTime;
             IsActive = true;
             IsDeletable = false;
             IsVerified = false;
@@ -45,11 +46,7 @@ namespace Domain.JobAgg
 
         // **********
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public DateTime InsertedDateTime { get; private set; }
-        // **********
 
-        // **********
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public DateTime UpdateDateTime { get; private set; }
         // **********
 
@@ -167,14 +164,14 @@ namespace Domain.JobAgg
         [Display(
         ResourceType = typeof(Resources.DataDictionary),
         Name = nameof(Resources.DataDictionary.OpeningTime))]
-        public DateTime OpeningTime { get; set; }
+        public TimeSpan OpeningTime { get; set; }
         // **********
 
         // **********
         [Display(
         ResourceType = typeof(Resources.DataDictionary),
         Name = nameof(Resources.DataDictionary.ClosingTime))]
-        public DateTime ClosingTime { get; set; }
+        public TimeSpan ClosingTime { get; set; }
         // **********
 
         // **********
