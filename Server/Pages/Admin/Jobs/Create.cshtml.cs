@@ -1,6 +1,7 @@
 using Application.JobApp;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using ViewModels.Pages.Admin.Job;
@@ -17,8 +18,8 @@ public class CreateModel : Infrastructure.BasePageModel
         Logger = logger;
         JobApplication = jobApplication;
         ViewModel = new();
-        ViewModel.OpeningTime = Domain.SeedWork.Utility.Now;
-        ViewModel.ClosingTime = Domain.SeedWork.Utility.Now;
+        ViewModel.OpeningTime = TimeSpan.Parse("08:00");
+        ViewModel.ClosingTime = TimeSpan.Parse("22:00");
     }
     private ILogger<CreateModel> Logger { get; }
 

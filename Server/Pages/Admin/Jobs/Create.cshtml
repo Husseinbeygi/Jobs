@@ -84,17 +84,17 @@
                 <label asp-for="ViewModel.IsVerified"></label>
                 <input asp-for="ViewModel.IsVerified" />
             </section-form-check>
-
-            <section-form-buttons>
-                <button-create />
-                <button-reset />
-            </section-form-buttons>
-
-            <section-form-footer>
-                <a asp-page="Index">
-                    @(Html.DtatGetLinkCaptionForList())
-                </a>
-            </section-form-footer>
         </fieldset>
+
+        <section-form-buttons>
+            <button-create />
+            <button-reset />
+        </section-form-buttons>
+
+        <section-form-footer>
+            <a asp-page="Index">
+                @(Html.DtatGetLinkCaptionForList())
+            </a>
+        </section-form-footer>
     </section-form>
 </form>
