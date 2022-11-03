@@ -8,7 +8,9 @@ using static Domain.SeedWork.Constants;
 
 namespace Domain.CommentAgg;
 
-public class Comment : Entity
+public class Comment : Entity,
+	IEntityIdIsSetable,
+	IEntityHasUpdateDateTime
 {
 	
 
@@ -56,5 +58,5 @@ public class Comment : Entity
 		Id = id;
 	}
 
-	//OwnerId
+	public Guid? OwnerId { get; set; }
 }
