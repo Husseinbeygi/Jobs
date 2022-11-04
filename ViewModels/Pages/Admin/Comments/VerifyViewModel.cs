@@ -8,6 +8,13 @@ public class VerifyViewModel : object
 
 	// **********
 	[System.ComponentModel.DataAnnotations.Display
+		(Name = nameof(Resources.DataDictionary.Id),
+		ResourceType = typeof(Resources.DataDictionary))]
+	public System.Guid? Id { get; init; }
+	// **********
+
+	// **********
+	[System.ComponentModel.DataAnnotations.Display
 		(Name = nameof(Resources.DataDictionary.Comments),
 		ResourceType = typeof(Resources.DataDictionary))]
 	public string Comment { get; init; }
@@ -17,7 +24,7 @@ public class VerifyViewModel : object
 	[System.ComponentModel.DataAnnotations.Display
 		(Name = nameof(Resources.DataDictionary.Score),
 		ResourceType = typeof(Resources.DataDictionary))]
-	public string Score { get; init; }
+	public decimal Score { get; init; }
 	// **********
 
 	// **********
@@ -46,5 +53,12 @@ public class VerifyViewModel : object
 		(Name = nameof(Resources.DataDictionary.InsertDateTime),
 		ResourceType = typeof(Resources.DataDictionary))]
 	public System.DateTime? InsertDateTime { get; init; }
+	// **********
+
+	// **********
+	[System.ComponentModel.DataAnnotations.Display
+		(Name = nameof(Resources.DataDictionary.AdminDescription),
+		ResourceType = typeof(Resources.DataDictionary))]
+	public string? AdminDescription { get; set; }
 	// **********
 }
