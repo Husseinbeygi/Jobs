@@ -601,6 +601,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Job Id.
+        /// </summary>
+        public static string JobId {
+            get {
+                return ResourceManager.GetString("JobId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Keywords.
         /// </summary>
         public static string Keywords {
@@ -786,6 +795,15 @@ namespace Resources {
         public static string Ordering {
             get {
                 return ResourceManager.GetString("Ordering", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner Id.
+        /// </summary>
+        public static string OwnerId {
+            get {
+                return ResourceManager.GetString("OwnerId", resourceCulture);
             }
         }
         
@@ -1101,6 +1119,15 @@ namespace Resources {
         public static string UserCount {
             get {
                 return ResourceManager.GetString("UserCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Id.
+        /// </summary>
+        public static string UserId {
+            get {
+                return ResourceManager.GetString("UserId", resourceCulture);
             }
         }
         
