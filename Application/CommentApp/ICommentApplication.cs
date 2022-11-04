@@ -12,7 +12,7 @@ namespace Application.CommentApp
 	public interface ICommentApplication
 	{
 		Task<OperationResult> DeleteComment(Guid Id);
-		Task<OperationResultWithData<IndexItemViewModel>> GetComment(Guid Id);
+		Task<OperationResultWithData<VerifyViewModel>> GetComment(Guid Id);
 		Task<OperationResultWithData<IList<IndexItemViewModel>>> GetAllComments();
 		Task<OperationResultWithData<Comment>> GetCommentByUserId(Guid Id);
 

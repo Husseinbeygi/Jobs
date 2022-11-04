@@ -53,18 +53,17 @@ namespace Application.CommentApp
 			return res;
 		}
 
-		public async Task<OperationResultWithData<IndexItemViewModel>> GetComment(Guid Id)
+		public async Task<OperationResultWithData<VerifyViewModel>> GetComment(Guid Id)
 		{
-			var res = new OperationResultWithData<IndexItemViewModel>();
+			var res = new OperationResultWithData<VerifyViewModel>();
 
 			var comment = await _repository.GetAsync(Id);
 
-			var _comment = new IndexItemViewModel
+			var _comment = new VerifyViewModel
 			{
 				Comment = comment?.Comments,
 				Id = comment?.Id,
 				InsertDateTime = comment?.InsertDateTime,
-				IsVerified = comment.IsVerified,
 				IsDeleted = comment.IsDeleted,
 				IsEdited = comment.IsEdited,
 				UpdateDateTime = comment.UpdateDateTime,
