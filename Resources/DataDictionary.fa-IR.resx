@@ -477,6 +477,15 @@
   <data name="Dashboard" xml:space="preserve">
     <value>پیشخان</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>دسته بندی</value>
+  </data>
+  <data name="WithoutParent" xml:space="preserve">
+    <value>یتیم</value>
+  </data>
+  <data name="IsDeletable" xml:space="preserve">
+    <value>قابل حذف</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>آدرس</value>
   </data>

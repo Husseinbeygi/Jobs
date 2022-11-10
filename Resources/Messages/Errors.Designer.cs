@@ -160,6 +160,15 @@ namespace Resources.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is not any data with this Name!.
+        /// </summary>
+        public static string ThereIsNotAnyDataWithThisName {
+            get {
+                return ResourceManager.GetString("ThereIsNotAnyDataWithThisName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We are unable to {0} this {1}!.
         /// </summary>
         public static string UnableTo {
