@@ -1,0 +1,74 @@
+﻿@page
+@model Server.Pages.Admin.Categories.CreateModel
+@using Resources
+
+@{
+    var pageTitle = $"{ButtonCaptions.Create} {DataDictionary.Category}";
+    ViewData[ViewDataKeyNames.PageTitle] = pageTitle;
+
+    Layout = "Layouts/Admin/Rtl/_Layout";
+}
+
+
+<form method="post">
+
+    <section-form>
+        <fieldset>
+            <section-form-header>
+                @(pageTitle)
+            </section-form-header>
+
+            <partial name="PartialViews/_DisplayPageMessages" />
+
+            <section-form-field>
+                <label asp-for="ViewModel.Name"></label>
+                <input asp-for="ViewModel.Name" />
+                <span asp-validation-for="ViewModel.Name"></span>
+            </section-form-field>
+
+            <section-form-field>
+                <label asp-for="ViewModel.ParentId"></label>
+
+                <select class="form-select" asp-for="ViewModel.ParentId"
+                        asp-items="@(new SelectList(Model.ParentsViewModel,
+						nameof(ViewModels.Shared.KeyValueViewModel.Id),
+						nameof(ViewModels.Shared.KeyValueViewModel.Name)))">
+
+                    <option value="@(null)" selected>
+                        @(DataDictionary.WithoutParent)
+                    </option>
+                </select>
+
+                <span asp-validation-for="ViewModel.ParentId"></span>
+            </section-form-field>
+
+            <section-form-field>
+                <label asp-for="ViewModel.Ordering"></label>
+                <input asp-for="ViewModel.Ordering" />
+                <span asp-validation-for="ViewModel.Ordering"></span>
+            </section-form-field>
+
+            <section-form-check>
+                <input asp-for="ViewModel.IsActive" />
+                <label asp-for="ViewModel.IsActive"></label>
+            </section-form-check>
+
+            <section-form-check>
+                <input asp-for="ViewModel.IsDeletable" />
+                <label asp-for="ViewModel.IsDeletable"></label>
+            </section-form-check>
+        </fieldset>
+
+        <section-form-buttons>
+            <button-create />
+            <button-reset />
+        </section-form-buttons>
+
+        <section-form-footer>
+            <a asp-page="Index">
+                @(Html.DtatGetLinkCaptionForList())
+            </a>
+        </section-form-footer>
+    </section-form>
+
+</form>

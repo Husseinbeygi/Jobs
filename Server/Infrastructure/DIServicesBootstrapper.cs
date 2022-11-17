@@ -1,7 +1,7 @@
 ﻿using Application.AccountApp;
+using Application.CategoryApp;
 using Application.UserApp;
-using Application.CommentApp;
-using Domain.CommentAgg;
+using Domain.CategoryAgg;
 using Domain.UserAgg;
 using Framework.Password;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,8 +18,11 @@ namespace Infrastructure
 			services.AddTransient<ICommentApplication, CommentApplication>();
 			services.AddTransient<ICommentRepository, CommentRepository>();
 
-			services.AddTransient<IAccountApplication, AccountApplication>();
+            services.AddTransient<IAccountApplication, AccountApplication>();
             services.AddTransient<IPasswordHasher,PasswordHasher>();
+
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<ICategoryApplication, CategoryApplication>();
         }
     }
 }

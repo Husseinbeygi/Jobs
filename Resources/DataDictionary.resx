@@ -498,4 +498,13 @@
   <data name="UserId" xml:space="preserve">
     <value>User Id</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="WithoutParent" xml:space="preserve">
+    <value>Without Parent</value>
+  </data>
+  <data name="IsDeletable" xml:space="preserve">
+    <value>Is Deletable</value>
+  </data>
 </root>
