@@ -55,6 +55,7 @@
 			public const int IP = 15;
 
 			public const int Name = 50;
+			public const int Name2 = 20;
 			public const int Title = 50;
 
 			public const int Username = 20;
