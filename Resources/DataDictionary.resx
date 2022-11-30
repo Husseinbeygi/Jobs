@@ -483,4 +483,10 @@
   <data name="IsDeletable" xml:space="preserve">
     <value>Is Deletable</value>
   </data>
+  <data name="EditorUserId" xml:space="preserve">
+    <value>Editor User Id</value>
+  </data>
+  <data name="WithoutChild" xml:space="preserve">
+    <value>Without Child</value>
+  </data>
 </root>
