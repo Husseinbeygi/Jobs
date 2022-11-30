@@ -1,7 +1,9 @@
 ﻿using Application.AccountApp;
 using Application.CategoryApp;
 using Application.UserApp;
+using Application.CommentApp;
 using Domain.CategoryAgg;
+using Domain.CommentAgg;
 using Domain.UserAgg;
 using Framework.Password;
 using Microsoft.Extensions.DependencyInjection;
