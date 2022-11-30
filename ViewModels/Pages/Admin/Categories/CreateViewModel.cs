@@ -2,20 +2,17 @@
 
 namespace ViewModels.Pages.Admin.Categories
 {
-    public class DetailsViewModel : UpdateViewModel
+    public class CreateViewModel : CommonViewModel
     {
         // **********
         [Display
             (ResourceType = typeof(Resources.DataDictionary),
             Name = nameof(Resources.DataDictionary.Parent))]
-        public string? ParentName { get; set; }
+        public Guid? ParentId { get; set; }
         // **********
 
         // **********
-        [Display
-            (ResourceType = typeof(Resources.DataDictionary),
-            Name = nameof(Resources.DataDictionary.EditorUserId))]
-        public string? EditorUserName { get; set; }
+        public Guid EditorUserId { get; set; }
         // **********
     }
 }
