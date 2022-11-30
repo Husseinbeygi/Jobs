@@ -186,4 +186,7 @@
   <data name="Update" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Verify</value>
+  </data>
 </root>
