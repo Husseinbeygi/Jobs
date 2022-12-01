@@ -1,8 +1,8 @@
 ﻿namespace ViewModels.Pages.Admin.Comments;
 
-public class VerifyViewModel : object
+public class DetailsViewModel : VerifyViewModel
 {
-	public VerifyViewModel() : base()
+	public DetailsViewModel() : base()
 	{
 	}
 
@@ -20,25 +20,16 @@ public class VerifyViewModel : object
 	public string Comment { get; init; }
 	// **********
 
-	// **********
 	[System.ComponentModel.DataAnnotations.Display
 		(Name = nameof(Resources.DataDictionary.Score),
 		ResourceType = typeof(Resources.DataDictionary))]
 	public decimal Score { get; init; }
-	// **********
 
 	// **********
 	[System.ComponentModel.DataAnnotations.Display
-		(Name = nameof(Resources.DataDictionary.IsDeleted),
+		(Name = nameof(Resources.DataDictionary.IsVerified),
 		ResourceType = typeof(Resources.DataDictionary))]
-	public bool IsDeleted { get; init; }
-	// **********
-
-	// **********
-	[System.ComponentModel.DataAnnotations.Display
-		(Name = nameof(Resources.DataDictionary.IsEdited),
-		ResourceType = typeof(Resources.DataDictionary))]
-	public bool IsEdited { get; init; }
+	public bool IsVerified { get; init; }
 	// **********
 
 	// **********
