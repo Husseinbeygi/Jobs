@@ -11,6 +11,7 @@ namespace Application.CommentApp
 {
 	public interface ICommentApplication
 	{
+		Task<OperationResult> AddComment(CreateViewModel comment);
 		Task<OperationResult> DeleteComment(Guid Id);
 		Task<OperationResultWithData<VerifyViewModel>> GetComment(Guid Id);
 		Task<OperationResultWithData<IList<IndexItemViewModel>>> GetAllComments();

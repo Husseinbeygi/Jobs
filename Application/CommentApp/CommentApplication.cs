@@ -19,6 +19,23 @@ namespace Application.CommentApp
 			_repository = repository;
 		}
 
+		public async Task<OperationResult> AddComment(CreateViewModel comment)
+		{
+			var res = new OperationResult();
+
+			var _comment = new Comment()
+			{
+				Comments = comment.Comment,
+				Score = comment.Score,
+				OwnerId = comment.OwnerId,
+			};
+
+			await _repository.CreateAsync(_comment);
+			await _repository.SaveChangesAsync();
+			res.Succeeded = true;
+			return res;
+		}
+
 		public async Task<OperationResult> DeleteComment(Guid Id)
 		{
 			var res = new OperationResult();
