@@ -1,0 +1,96 @@
+﻿@page
+@model Server.Pages.Admin.Comments.IndexModel
+
+@{
+	var pageTitle =
+		$"{Resources.ButtonCaptions.ListOf} {Resources.DataDictionary.Comments}";
+
+	ViewData[Infrastructure.ViewDataKeyNames.PageTitle] = pageTitle;
+
+	Layout = "Layouts/Admin/Rtl/_Layout";
+
+}
+
+<section-page-header>
+	@(pageTitle)
+</section-page-header>
+
+<section-page-actions>
+	<a asp-page="Create">
+		@(Html.DtatGetLinkCaptionForCreate())
+	</a>
+</section-page-actions>
+
+<section-table>
+	<table>
+		<caption>
+			@(pageTitle)
+		</caption>
+
+		<thead>
+			<tr>
+				<th>
+					@(Resources.DataDictionary.RowNumber)
+				</th>
+				<th>
+				</th>
+				<th>
+					@(Resources.DataDictionary.Comment)
+				</th>
+				<th>
+					@(Resources.DataDictionary.IsEdited)
+				</th>
+				<th>
+					@(Resources.DataDictionary.IsDeleted)
+				</th>
+				<th>
+					@(Resources.DataDictionary.IsVerified)
+				</th>
+				<th>
+					@(Resources.DataDictionary.Score)
+				</th>
+				<th>
+					@(Resources.DataDictionary.InsertDateTime)
+				</th>
+				<th>
+					@(Resources.DataDictionary.UpdateDateTime)
+				</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@for (int index = 0; index <= Model.ViewModel.Count - 1; index++)
+			{
+				var item = Model.ViewModel[index];
+
+				<tr>
+					@(Html.DtatDisplayRowNumberWithTd(value: index + 1))
+
+					<table-actions>
+						<a asp-page="Verify" asp-route-id="@(item.Id)">
+							@(Html.DtatGetIconDetails())
+						</a>
+					</table-actions>
+
+					<td>
+						@(item.Comment)
+					</td>
+
+					@(Html.DtatDisplayBooleanWithTd(value: item.IsEdited))
+
+					@(Html.DtatDisplayBooleanWithTd(value: item.IsDeleted))
+
+					@(Html.DtatDisplayBooleanWithTd(value: item.IsVerified))
+
+					<td>
+						@(item.Score)
+					</td>
+
+					@(Html.DtatDisplayDateTimeWithTd(value: item.InsertDateTime))
+
+					@(Html.DtatDisplayDateTimeWithTd(value: item.UpdateDateTime))
+				</tr>
+			}
+		</tbody>
+	</table>
+</section-table>
