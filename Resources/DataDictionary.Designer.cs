@@ -331,6 +331,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Editor User Id.
+        /// </summary>
+        public static string EditorUserId {
+            get {
+                return ResourceManager.GetString("EditorUserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email Address.
         /// </summary>
         public static string EmailAddress {
@@ -1218,6 +1227,15 @@ namespace Resources {
         public static string Websites {
             get {
                 return ResourceManager.GetString("Websites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Without Child.
+        /// </summary>
+        public static string WithoutChild {
+            get {
+                return ResourceManager.GetString("WithoutChild", resourceCulture);
             }
         }
         

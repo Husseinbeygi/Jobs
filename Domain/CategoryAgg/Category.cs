@@ -1,18 +1,22 @@
 ﻿using Domain.SeedWork;
+using Domain.UserAgg;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.CategoryAgg
 {
     public class Category : 
         Entity,
         IEntityHasIsActive,
-        IEntityHasIsDeletable
+        IEntityHasIsDeletable,
+        IEntityHasEditorUserId
     {
         public Category()
         {
-            Ordering = 1_000;
+            Ordering = 10_000;
             IsActive = true;
             IsDeletable = false;
+            UpdateDateTime = InsertDateTime;
         }
 
 
@@ -24,6 +28,7 @@ namespace Domain.CategoryAgg
         [Display
             (ResourceType = typeof(Resources.DataDictionary),
             Name = nameof(Resources.DataDictionary.Name))]
+        [MaxLength(Constants.MaxLength.Name2)]
         public string Name { get; set; }
         // **********
 
@@ -41,5 +46,26 @@ namespace Domain.CategoryAgg
         // **********
         public bool IsDeletable { get; set; }
         // **********
+
+        // **********
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public DateTime UpdateDateTime { get; private set; }
+        // **********
+
+
+        // **********
+        [Column(nameof(EditorUserId))]
+        [Required
+            (AllowEmptyStrings = false,
+            ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+            ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+        public Guid EditorUserId { get; set; }
+        public User User { get; set; }
+        // **********
+
+        public void SetUpdateDateTime()
+        {
+            UpdateDateTime = Utility.Now;
+        }
     }
 }
