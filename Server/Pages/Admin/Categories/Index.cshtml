@@ -15,74 +15,96 @@
 </section-page-header>
 
 <section-page-actions>
-    <a asp-page="Create">
-        @(Html.DtatGetLinkCaptionForCreate())
-    </a>
+    @if (Request.Query["Id"].ToString() == string.Empty)
+    {
+        <a asp-page="Create">
+            @(Html.DtatGetLinkCaptionForCreate())
+        </a>
+    }
+    else
+    {
+        <a asp-page="Index" class="btn btn-secondary">@(ButtonCaptions.Back)</a>
+    }
 </section-page-actions>
 
-<main class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-    @foreach (var categoryGroup in Model.ViewModel)
-    {
-        var randomId = "RandomId-" + new Random().Next(1000, 9999);
-        <div class="col py-2 px-2">
-            <div class="row m-0 d-flex align-items-center justify-content-between text-decoration-none fw-bold w-100 bg-light text-black fs-5 border rounded-2 ps-3 pe-2">
-                <div class="col row align-items-center py-2" type="button" data-bs-toggle="collapse" data-bs-target="#@(randomId)" data-bs-auto-close="inside" aria-expanded="false" aria-controls="@(randomId)">
-                    @if (categoryGroup.Value.Count != 0)
-                    {
-                        <i class="bi-plus-square col-auto d-flex align-items-center bi text-primary me-1 p-1"></i>
-                    }
-                    <span class="col-auto p-0">@(categoryGroup.Key.Name)</span>
-                    @if (!categoryGroup.Key.IsActive)
-                    {
-                        <span class="col-auto text-danger fw-normal fs-6 p-0 px-1">(@(DataDictionary.Deactive))</span>
-                    }
-                </div>
-                <div class="col-auto row py-2">
-                    <a asp-page="Details" asp-route-id="@(categoryGroup.Key.Id)" class="col-auto text-decoration-none px-1"><i class="bi bi-zoom-in text-primary d-flex align-items-center"></i></a>
-                    <a asp-page="Update" asp-route-id="@(categoryGroup.Key.Id)" class="col-auto text-decoration-none px-1"><i class="bi bi-pencil text-warning d-flex align-items-center"></i></a>
-                    @{
-                        if (categoryGroup.Key.IsDeletable)
+<section-table>
+    <table>
+        <caption>
+            @(pageTitle)
+        </caption>
+
+        <thead>
+            <tr>
+                <th>
+                    @(DataDictionary.RowNumber)
+                </th>
+                <th>
+                    @(DataDictionary.Action)
+                </th>
+                <th>
+                    @(DataDictionary.Name)
+                </th>
+                <th>
+                    @(DataDictionary.IsActive)
+                </th>
+                <th>
+                    @(DataDictionary.IsDeletable)
+                </th>
+                <th>
+                    @(DataDictionary.Ordering)
+                </th>
+                <th>
+                    @(DataDictionary.Children)
+                </th>
+            </tr>
+        </thead>
+
+        <tbody class="text-center">
+            @for (int index = 0; index <= Model.ViewModel.Count - 1; index++)
+            {
+                var item = Model.ViewModel[index];
+
+                <tr>
+                    @(Html.DtatDisplayRowNumberWithTd(index + 1))
+
+                    <table-actions>
+                        <a asp-page="Details" asp-route-id="@(item.Id)">
+                            @(Html.DtatGetIconDetails())
+                        </a>
+                        <a asp-page="Update" asp-route-id="@(item.Id)">
+                            @(Html.DtatGetIconUpdate())
+                        </a>
+
+                        @if (item.IsDeletable)
                         {
-                            <a asp-page="Delete" asp-route-id="@(categoryGroup.Key.Id)" class="col-auto text-decoration-none px-1"><i class="bi bi-trash text-danger d-flex align-items-center"></i></a>
+                            <a asp-page="Delete" asp-route-id="@(item.Id)">
+                                @(Html.DtatGetIconDelete())
+                            </a>
+                        }
+                    </table-actions>
+
+                    <td>
+                        @(item.Name)
+                    </td>
+
+                    @(Html.DtatDisplayBooleanWithTd(item.IsActive))
+
+                    @(Html.DtatDisplayBooleanWithTd(item.IsDeletable))
+
+                    @(Html.DtatDisplayIntegerWithTd(item.Ordering))
+
+                    <td>
+                        @if (item.ChildCount > 0)
+                        {
+                            @(Html.SmallLinkButton(ButtonCaptions.Show, "categories", "Id", item.Id.ToString()))
                         }
                         else
                         {
-                            <a style="visibility: hidden;" class="col-auto text-decoration-none px-1"><i class="bi bi-trash text-danger d-flex align-items-center"></i></a>
+                            <text>@(DataDictionary.WithoutChild)</text>
                         }
-                    }
-                </div>
-            </div>
-            @if (categoryGroup.Value.Count != 0)
-            {
-                <div class="collapse list-group pt-1" id="@(randomId)">
-                    @for (int i = 0; i < categoryGroup.Value.Count; i++)
-                    {
-                        <div class="list-group-item row d-flex mx-0">
-                            <div class="col">
-                                <span>@($"[{ i + 1 }] - { categoryGroup.Value[i].Name }")</span>
-                                @if (!categoryGroup.Value[i].IsActive)
-                                {
-                                    <span class="col-auto text-danger fw-normal fs-6 p-0">(@(DataDictionary.Deactive))</span>
-                                }
-                            </div>
-                            <div class="col-auto row align-items-center">
-                                <a asp-page="Details" asp-route-id="@(categoryGroup.Value[i].Id)" class="col-auto text-decoration-none px-2"><i class="bi bi-zoom-in text-primary d-flex align-items-center"></i></a>
-                                <a asp-page="Update" asp-route-id="@(categoryGroup.Value[i].Id)" class="col-auto text-decoration-none px-2"><i class="bi bi-pencil text-warning d-flex align-items-center"></i></a>
-                                @{
-                                    if (categoryGroup.Value[i].IsDeletable)
-                                    {
-                                        <a asp-page="Delete" asp-route-id="@(categoryGroup.Value[i].Id)" class="col-auto text-decoration-none px-2"><i class="bi bi-trash text-danger d-flex align-items-center"></i></a>
-                                    }
-                                    else
-                                    {
-                                        <a style="visibility: hidden;" class="col-auto text-decoration-none px-2"><i class="bi bi-trash text-danger d-flex align-items-center"></i></a>
-                                    }
-                                }
-                            </div>
-                        </div>
-                    }
-                </div>
+                    </td>
+                </tr>
             }
-        </div>
-    }
-</main>
+        </tbody>
+    </table>
+</section-table>

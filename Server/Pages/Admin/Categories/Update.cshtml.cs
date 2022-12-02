@@ -6,6 +6,7 @@ using Resources;
 using Resources.Messages;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ViewModels.Pages.Admin.Categories;
 using ViewModels.Shared;
@@ -37,24 +38,14 @@ namespace Server.Pages.Admin.Categories
                 return RedirectToPage("Index");
             }
 
-            var _ViewModel = (await _application.GetCategory(id.Value)).Data;
+            ViewModel = (await _application.GetCategory(id.Value)).Data;
 
-            if (_ViewModel == null)
+            if (ViewModel == null)
             {
                 AddToastError(Resources.Messages.Errors.ThereIsNotAnyDataWithThisId);
 
                 return RedirectToPage("Index");
             }
-
-            ViewModel = new UpdateViewModel()
-            {
-                Id = _ViewModel.Id,
-                Name = _ViewModel.Name,
-                ParentId = (await _application.GetCategoryByName(_ViewModel.ParentName)).Data?.Id,
-                Ordering = _ViewModel.Ordering,
-                IsActive = _ViewModel.IsActive,
-                IsDeletable = _ViewModel.IsDeletable,
-            };
 
             if (ViewModel.ParentId.HasValue)
             {
@@ -95,6 +86,9 @@ namespace Server.Pages.Admin.Categories
                 return Page();
             }
 
+            var editorUserId = User.Claims.FirstOrDefault(x => x.Type == "Id").Value;
+            Console.WriteLine(editorUserId);
+            ViewModel.EditorUserId = Guid.Parse(editorUserId);
             var res = await _application.UpdateCategory(ViewModel);
 
             if (!res.Succeeded || res.ErrorMessages.Count > 0)
