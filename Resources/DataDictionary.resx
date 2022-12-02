@@ -483,6 +483,32 @@
   <data name="IsDeletable" xml:space="preserve">
     <value>Is Deletable</value>
   </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="ClosingTime" xml:space="preserve">
+    <value>ClosingTime</value>
+  </data>
+  <data name="JobName" xml:space="preserve">
+    <value>JobName</value>
+  </data>
+  <data name="OpeningTime" xml:space="preserve">
+    <value>OpeningTime</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="CategoryId" xml:space="preserve">
+    <value>CategoryId</value>
+  </data>
+  <data name="OwnerId" xml:space="preserve">
+    <value>OwnerId</value>
+  </data>
+  <data name="Jobs" xml:space="preserve">
+    <value>Jobs</value>
+  </data>
+  <data name="Job" xml:space="preserve">
+    <value>Job</value>
   <data name="EditorUserId" xml:space="preserve">
     <value>Editor User Id</value>
   </data>

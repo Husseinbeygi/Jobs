@@ -1,0 +1,100 @@
+﻿@page
+@model Server.Pages.Admin.Jobs.CreateModel
+@{
+    var pageTitle = $"{Resources.ButtonCaptions.Create} {Resources.DataDictionary.Job}";
+
+    ViewData[Infrastructure.ViewDataKeyNames.PageTitle] = pageTitle;
+
+    Layout = "Layouts/Admin/Rtl/_Layout";
+}
+
+<form method="post">
+    <section-form>
+        <fieldset>
+            <section-form-header>
+                @(pageTitle)
+            </section-form-header>
+
+            <partial name="PartialViews/_DisplayPageMessages" />
+
+            <section-form-field>
+                <label asp-for="ViewModel.Name"></label>
+                <input asp-for="ViewModel.Name" />
+                <span asp-validation-for="ViewModel.Name"></span>
+            </section-form-field>
+
+            <section-form-field>
+                <label asp-for="ViewModel.Address"></label>
+                <input asp-for="ViewModel.Address" />
+                <span asp-validation-for="ViewModel.Address"></span>
+            </section-form-field>
+
+            <section-form-field>
+                <label asp-for="ViewModel.Description"></label>
+                <input asp-for="ViewModel.Description" />
+                <span asp-validation-for="ViewModel.Description"></span>
+            </section-form-field>
+
+            <section-form-field>
+                <label asp-for="ViewModel.OpeningTime"></label>
+                <input asp-for="ViewModel.OpeningTime" />
+                <span asp-validation-for="ViewModel.OpeningTime"></span>
+            </section-form-field>
+
+            <section-form-field>
+                <label asp-for="ViewModel.ClosingTime"></label>
+                <input asp-for="ViewModel.ClosingTime" />
+                <span asp-validation-for="ViewModel.ClosingTime"></span>
+            </section-form-field>
+
+            <section-form-field>
+                <label asp-for="ViewModel.PhoneNumber1"></label>
+                <input asp-for="ViewModel.PhoneNumber1" />
+                <span asp-validation-for="ViewModel.PhoneNumber1"></span>
+            </section-form-field>
+
+            <section-form-field>
+                <label asp-for="ViewModel.CategoryId"></label>
+                <input asp-for="ViewModel.CategoryId" />
+                <span asp-validation-for="ViewModel.CategoryId"></span>
+            </section-form-field>
+
+            <section-form-field>
+                <label asp-for="ViewModel.OwnerId"></label>
+                <input asp-for="ViewModel.OwnerId" />
+                <span asp-validation-for="ViewModel.OwnerId"></span>
+            </section-form-field>
+
+            <section-form-check>
+                <label asp-for="ViewModel.IsActive"></label>
+                <input asp-for="ViewModel.IsActive" />
+            </section-form-check>
+
+            <section-form-check>
+                <label asp-for="ViewModel.IsDeletable"></label>
+                <input asp-for="ViewModel.IsDeletable" />
+            </section-form-check>
+
+            <section-form-check>
+                <label asp-for="ViewModel.IsUndeletable"></label>
+                <input asp-for="ViewModel.IsUndeletable" />
+            </section-form-check>
+
+            <section-form-check>
+                <label asp-for="ViewModel.IsVerified"></label>
+                <input asp-for="ViewModel.IsVerified" />
+            </section-form-check>
+        </fieldset>
+
+        <section-form-buttons>
+            <button-create />
+            <button-reset />
+        </section-form-buttons>
+
+        <section-form-footer>
+            <a asp-page="Index">
+                @(Html.DtatGetLinkCaptionForList())
+            </a>
+        </section-form-footer>
+    </section-form>
+</form>
