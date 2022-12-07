@@ -55,6 +55,7 @@
 			public const int IP = 15;
 
 			public const int Name = 50;
+			public const int Name2 = 20;
 			public const int Title = 50;
 
 			public const int Username = 20;
@@ -69,6 +70,10 @@
             public const int LastName = 50;
 
 			public const int Comment = 4000;
+            public const int Description = 4000;
+            public const int Address = 4000;
+            public const int Name_Job = 500;
+
         }
 
         /// <summary>

@@ -1,6 +1,8 @@
 ﻿using Application.AccountApp;
+using Application.JobApp;
 using Application.CategoryApp;
 using Application.UserApp;
+using Domain.JobAgg;
 using Application.CommentApp;
 using Domain.CategoryAgg;
 using Domain.CommentAgg;
@@ -21,6 +23,10 @@ namespace Infrastructure
 			services.AddTransient<ICommentRepository, CommentRepository>();
 
             services.AddTransient<IAccountApplication, AccountApplication>();
+            services.AddTransient<IPasswordHasher,PasswordHasher>();
+
+            services.AddTransient<IJobApplication, JobApplication>();
+            services.AddTransient<IJobRepository, JobRepository>();
             services.AddTransient<IPasswordHasher,PasswordHasher>();
 
             services.AddTransient<ICategoryRepository, CategoryRepository>();

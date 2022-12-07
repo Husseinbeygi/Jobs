@@ -384,4 +384,19 @@ public static class HtmlHelpers : object
 
 		return icon;
 	}
+
+	public static Microsoft.AspNetCore.Html.IHtmlContent SmallLinkButton
+	(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper html, string? text, string? page, string? roteName, string? routeValue)
+	{
+		var a = new Microsoft.AspNetCore.Mvc.Rendering.TagBuilder("a");
+
+		a.AddCssClass("btn btn-primary py-0 d-flex justify-content-center rounded-1");
+		a.Attributes.Add("href", $"{page}?{roteName}={routeValue}");
+		a.Attributes.Add("asp-route-id", routeValue);
+
+
+		a.InnerHtml.AppendHtml(text);
+
+		return a;
+	}
 }

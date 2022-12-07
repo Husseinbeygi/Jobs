@@ -1,4 +1,5 @@
-﻿using Domain.SeedWork;
+﻿using Domain.CategoryAgg;
+using Domain.SeedWork;
 using Resources.Messages;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -181,6 +182,10 @@ public class User :
 
 	// **********
 	public string? AdminDescription { get; set; }
+	// **********
+
+	// **********
+	public List<Category> CategoriesEdited { get; set; }
 	// **********
 
 	public void SetUpdateDateTime()

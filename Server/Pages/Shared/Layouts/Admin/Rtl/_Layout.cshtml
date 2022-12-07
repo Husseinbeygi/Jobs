@@ -132,12 +132,15 @@
                                 <i class="d-flex fs-4 bi-grid"></i> <span class="ms-2 d-none d-sm-inline">@(Resources.DataDictionary.Category)</span>
                             </a>
                         </li>
-					</ul>
-					<hr>
-				</div>
-			</div>
-			
-        
+                        <li class="nav-item w-100">
+                            <a asp-page="/Admin/Jobs/Index" class="d-flex align-items-center text-white nav-link px-0 my-2">
+                                <i class="d-flex fs-4 bi-cup"></i> <span class="ms-2 d-none d-sm-inline">@(Resources.DataDictionary.Jobs)</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                </div>
+            </div>
             <div class="col py-3">
 
                 <partial name="PartialViews/Admin/Rtl/_Header" />
