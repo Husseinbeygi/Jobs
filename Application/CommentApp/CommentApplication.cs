@@ -59,6 +59,32 @@ namespace Application.CommentApp
 			return res;
 		}
 
+		public async Task<OperationResult> VerifyComment(Guid Id)
+		{
+			var res = new OperationResult();
+			var CommentForVerify = await _repository.GetAsync(Id);
+
+			if (CommentForVerify == null)
+			{
+				res.AddErrorMessage
+					(message: Errors.ThereIsNotAnyDataWithThisId);
+			}
+
+			if (res.ErrorMessages.Count > 0)
+			{
+				res.Succeeded = false;
+				return res;
+			}
+
+			var _comment = new DetailsViewModel
+			{
+				IsVerified = true,
+			};
+			await _repository.SaveChangesAsync();
+			res.Succeeded = true;
+			return res;
+		}
+
 		public async Task<OperationResultWithData<Comment>> GetCommentByUserId(Guid Id)
 		{
 			var res = new OperationResultWithData<Comment>();
@@ -70,13 +96,13 @@ namespace Application.CommentApp
 			return res;
 		}
 
-		public async Task<OperationResultWithData<VerifyViewModel>> GetComment(Guid Id)
+		public async Task<OperationResultWithData<DetailsViewModel>> GetComment(Guid Id)
 		{
-			var res = new OperationResultWithData<VerifyViewModel>();
+			var res = new OperationResultWithData<DetailsViewModel>();
 
 			var comment = await _repository.GetAsync(Id);
 
-			var _comment = new VerifyViewModel
+			var _comment = new DetailsViewModel
 			{
 				Comment = comment?.Comments,
 				Id = comment?.Id,

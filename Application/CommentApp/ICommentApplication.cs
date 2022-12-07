@@ -13,7 +13,8 @@ namespace Application.CommentApp
 	{
 		Task<OperationResult> AddComment(CreateViewModel comment);
 		Task<OperationResult> DeleteComment(Guid Id);
-		Task<OperationResultWithData<VerifyViewModel>> GetComment(Guid Id);
+		Task<OperationResult> VerifyComment(Guid Id);
+		Task<OperationResultWithData<DetailsViewModel>> GetComment(Guid Id);
 		Task<OperationResultWithData<IList<IndexItemViewModel>>> GetAllComments();
 		Task<OperationResultWithData<Comment>> GetCommentByUserId(Guid Id);
 
