@@ -898,15 +898,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Owner Id.
-        /// </summary>
-        public static string OwnerId {
-            get {
-                return ResourceManager.GetString("OwnerId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Page.
         /// </summary>
         public static string Page {
@@ -1088,15 +1079,6 @@ namespace Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to Score.
-        /// </summary>
-        public static string Score {
-            get {
-                return ResourceManager.GetString("Score", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Rate.
         /// </summary>
         public static string Score {
             get {
