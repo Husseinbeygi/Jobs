@@ -340,6 +340,21 @@ public static class HtmlHelpers : object
 		return icon;
 	}
 
+	public static Microsoft.AspNetCore.Html.IHtmlContent DtatGetIconVerify
+		(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper html)
+	{
+		if (html is null)
+		{
+			throw new System
+				.ArgumentNullException(paramName: nameof(html));
+		}
+
+		var icon =
+			TagHelpers.Utility.GetIconVerify();
+
+		return icon;
+	}
+
 	public static Microsoft.AspNetCore.Html.IHtmlContent DtatGetIconCreate
 		(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper html)
 	{
