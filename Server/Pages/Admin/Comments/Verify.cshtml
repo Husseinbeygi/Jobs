@@ -12,7 +12,7 @@
 }
 
 <section-form>
-	<fieldset>
+	<fieldset disabled>
 		<section-form-header>
 			@(pageTitle)
 		</section-form-header>
@@ -29,6 +29,11 @@
 			<input asp-for="ViewModel.Comment" />
 		</section-form-field>
 
+		<section-form-field>
+			<label asp-for="ViewModel.Score"></label>
+			<input asp-for="ViewModel.Score" />
+		</section-form-field>
+
 		<section-form-check>
 			<input asp-for="ViewModel.IsEdited" />
 			<label asp-for="ViewModel.IsEdited"></label>
@@ -39,10 +44,6 @@
 			<label asp-for="ViewModel.IsDeleted"></label>
 		</section-form-check>
 
-		<section-form-field>
-			<label asp-for="ViewModel.Score"></label>
-			<input asp-for="ViewModel.Score" />
-		</section-form-field>
 
 	</fieldset>
 

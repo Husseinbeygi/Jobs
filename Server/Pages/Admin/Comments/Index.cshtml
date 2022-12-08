@@ -68,8 +68,14 @@
 
 					<table-actions>
 						<a asp-page="Verify" asp-route-id="@(item.Id)">
-							@(Html.DtatGetIconDetails())
+							@(Html.DtatGetIconVerify())
 						</a>
+						@if (item.IsDeleted == false)
+						{
+							<a asp-page="Delete" asp-route-id="@(item.Id)">
+								@(Html.DtatGetIconDelete())
+							</a>
+						}
 					</table-actions>
 
 					<td>
