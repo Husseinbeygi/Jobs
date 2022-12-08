@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.UserAgg;
 
 namespace ViewModels.Pages.Admin.Comments;
 public class CreateViewModel : object
@@ -23,6 +24,13 @@ public class CreateViewModel : object
 		(Name = nameof(Resources.DataDictionary.Score),
 		ResourceType = typeof(Resources.DataDictionary))]
 	public decimal Score { get; set; }
+	// **********
+
+	// **********
+	[System.ComponentModel.DataAnnotations.Display
+		(Name = nameof(Resources.DataDictionary.UserId),
+		ResourceType = typeof(Resources.DataDictionary))]
+	public Guid UserId { get; set; }
 	// **********
 
 	// **********

@@ -27,6 +27,7 @@ namespace Application.CommentApp
 			{
 				Comments = comment.Comment,
 				Score = comment.Score,
+				UserId = comment.UserId,
 				OwnerId = comment.OwnerId,
 			};
 

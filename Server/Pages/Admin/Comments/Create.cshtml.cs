@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 using Microsoft.Build.Framework;
 using Application.UserApp;
 using System.Linq;
+using System.Security.Claims;
+using Server.Pages.Account;
+using Domain.CommentAgg;
+using Domain.UserAgg;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using static System.Net.Mime.MediaTypeNames;
+using System;
 
 namespace Server.Pages.Admin.Comments;
 
@@ -37,6 +44,8 @@ public class CreateModel : Infrastructure.BasePageModel
 			return Page();
 		}
 
+		var userId = User.Claims.FirstOrDefault(x => x.Type == "Id").Value;
+		ViewModel.UserId = Guid.Parse(userId);
 		var res = await CommentApplication.AddComment(ViewModel);
 
 		if (res.Succeeded == false ||
