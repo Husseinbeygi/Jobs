@@ -115,11 +115,18 @@
                         </ul>
                         </li>*@
 
-                        <li class="nav-item w-100">
-                            <a asp-page="/Admin/Users/Index" class="d-flex align-items-center text-white nav-link px-0 my-2">
-                                <i class="d-flex fs-4 bi-person"></i> <span class="ms-2 d-none d-sm-inline">@(Resources.DataDictionary.Users)</span>
-                            </a>
-                        </li>
+						<li>
+							<a asp-page="/Admin/Users/Index" class="text-white nav-link px-0 align-middle">
+								<i class="fs-4 bi-person"></i> <span class="ms-1 d-none d-sm-inline">@(Resources.DataDictionary.Users)</span>
+							</a>
+						</li>
+
+						<li>
+							<a asp-page="/Admin/Comments/Index" class="text-white nav-link px-0 align-middle">
+								<i class="fs-4 bi-chat-text"></i> <span class="ms-1 d-none d-sm-inline">@(Resources.DataDictionary.Comments)</span>
+							</a>
+						</li>
+
                         <li class="nav-item w-100">
                             <a asp-page="/Admin/Categories/Index" class="d-flex align-items-center text-white nav-link px-0 my-2">
                                 <i class="d-flex fs-4 bi-grid"></i> <span class="ms-2 d-none d-sm-inline">@(Resources.DataDictionary.Category)</span>
