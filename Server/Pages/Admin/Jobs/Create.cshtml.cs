@@ -1,10 +1,14 @@
 using Application.JobApp;
+using Domain.CategoryAgg;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ViewModels.Pages.Admin.Job;
+using ViewModels.Shared;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Server.Pages.Admin.Jobs;
 
@@ -13,23 +17,37 @@ namespace Server.Pages.Admin.Jobs;
 
 public class CreateModel : Infrastructure.BasePageModel
 {
-    public CreateModel(ILogger<CreateModel> logger, IJobApplication jobApplication)
+    public CreateModel(ILogger<CreateModel> logger, IJobApplication jobApplication,
+                       ICategoryRepository categoryRepository)
     {
         Logger = logger;
         JobApplication = jobApplication;
+        CategoryRepository = categoryRepository;
         ViewModel = new();
-        ViewModel.OpeningTime = TimeSpan.Parse("08:00");
-        ViewModel.ClosingTime = TimeSpan.Parse("22:00");
+        categories = new();
     }
     private ILogger<CreateModel> Logger { get; }
 
     private IJobApplication JobApplication { get; }
 
+    private ICategoryRepository CategoryRepository { get; }
+
+    public List<KeyValueViewModel> categories { get; set; }
+
     [BindProperty]
-    public CreateViewModel ViewModel { get; set; }
+    public CommonViewModel ViewModel { get; set; }
 
     public async Task OnGetAsync()
     {
+        var Categories = (await CategoryRepository.GetParents());
+        foreach (var category in Categories)
+        {
+            categories.Add(new KeyValueViewModel()
+            {
+                Id = category.Id,
+                Name = category.Name,
+            });
+        }
     }
 
     public async Task<IActionResult> OnPostAsync()

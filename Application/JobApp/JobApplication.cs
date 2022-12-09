@@ -1,7 +1,4 @@
-﻿using Domain;
-using Domain.JobAgg;
-using Domain.SeedWork;
-using Domain.UserAgg;
+﻿using Domain.JobAgg;
 using Framework.OperationResult;
 using Resources.Messages;
 using ViewModels.Pages.Admin.Job;
@@ -17,7 +14,7 @@ namespace Application.JobApp
             _jobRepository = jobRepository;
         }
 
-        public async Task<OperationResult> AddJob(CreateViewModel job)
+        public async Task<OperationResult> AddJob(CommonViewModel job)
         {
             var res = new OperationResult();
 
@@ -110,6 +107,7 @@ namespace Application.JobApp
                     Address = job.Address,
                     Description = job.Description,
                     PhoneNumber1 = job.PhoneNumber1,
+                    CategoryId = job.CategoryId,
                     IsActive = job.IsActive,
                     IsDeletable = job.IsDeletable,
                     OpeningTime = job.OpeningTime,
@@ -141,6 +139,7 @@ namespace Application.JobApp
                 PhoneNumber2 = job.PhoneNumber2,
                 CellPhoneNumber1 = job.CellPhoneNumber1,
                 CellPhoneNumber2 = job.CellPhoneNumber2,
+                CategoryId = job.CategoryId,
                 IsActive = job.IsActive,
                 IsDeletable = job.IsDeletable,
                 OpeningTime = job.OpeningTime,
@@ -197,6 +196,7 @@ namespace Application.JobApp
             jobForUpdate.PhoneNumber2 = job.PhoneNumber2;
             jobForUpdate.CellPhoneNumber1 = job.CellPhoneNumber1;
             jobForUpdate.CellPhoneNumber2 = job.CellPhoneNumber2;
+            jobForUpdate.CategoryId = job.CategoryId;
             jobForUpdate.OpeningTime = job.OpeningTime;
             jobForUpdate.ClosingTime = job.ClosingTime;
             jobForUpdate.IsActive = job.IsActive;

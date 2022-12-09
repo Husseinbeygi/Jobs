@@ -1,12 +1,13 @@
+using Application.CategoryApp;
 using Application.JobApp;
-using Application.UserApp;
+using Domain.CategoryAgg;
+using Domain.SeedWork;
+using Framework.OperationResult;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 using System;
+using System.Threading.Tasks;
 using ViewModels.Pages.Admin.Job;
-using Domain.SeedWork;
-using static Domain.SeedWork.Constants;
 
 namespace Server.Pages.Admin.Jobs;
 
@@ -15,15 +16,22 @@ namespace Server.Pages.Admin.Jobs;
 
 public class DetailsModel : Infrastructure.BasePageModel
 {
-    public DetailsModel(ILogger<DetailsModel> logger, IJobApplication jobApplication)
+    public DetailsModel(ILogger<DetailsModel> logger, IJobApplication jobApplication,
+                        ICategoryApplication categoryApplication)
     {
         Logger = logger;
         JobApplication = jobApplication;
+        CategoryApplication = categoryApplication;
         ViewModel = new();
     }
 
     private ILogger<DetailsModel> Logger { get; }
-    public IJobApplication JobApplication { get; }
+
+    private IJobApplication JobApplication { get; }
+
+    private ICategoryApplication CategoryApplication { get; }
+
+    public OperationResultWithData<ViewModels.Pages.Admin.Categories.DetailsViewModel> category { get; set; }
 
     public DetailsViewModel ViewModel { get; private set; }
 
@@ -48,6 +56,8 @@ public class DetailsModel : Infrastructure.BasePageModel
 
                 return RedirectToPage(pageName: "Index");
             }
+
+            category = await CategoryApplication.GetCategory(ViewModel.CategoryId);
 
             return Page();
         }

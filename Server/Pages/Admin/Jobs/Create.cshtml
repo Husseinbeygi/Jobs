@@ -55,7 +55,11 @@
 
             <section-form-field>
                 <label asp-for="ViewModel.CategoryId"></label>
-                <input asp-for="ViewModel.CategoryId" />
+                <select class="form-select" asp-for="ViewModel.CategoryId"
+                        asp-items="@(new SelectList(Model.categories,
+						nameof(ViewModels.Shared.KeyValueViewModel.Id),
+						nameof(ViewModels.Shared.KeyValueViewModel.Name)))">
+                </select>
                 <span asp-validation-for="ViewModel.CategoryId"></span>
             </section-form-field>
 
@@ -68,11 +72,6 @@
             <section-form-check>
                 <label asp-for="ViewModel.IsActive"></label>
                 <input asp-for="ViewModel.IsActive" />
-            </section-form-check>
-
-            <section-form-check>
-                <label asp-for="ViewModel.IsDeletable"></label>
-                <input asp-for="ViewModel.IsDeletable" />
             </section-form-check>
 
             <section-form-check>

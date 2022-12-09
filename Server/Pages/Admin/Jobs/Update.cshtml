@@ -39,11 +39,6 @@
 				<span asp-validation-for="ViewModel.Address"></span>
 			</section-form-field>
 
-			<section-form-check>
-				<input asp-for="ViewModel.IsActive" />
-				<label asp-for="ViewModel.IsActive"></label>
-			</section-form-check>
-
 			<section-form-field>
 				<label asp-for="ViewModel.PhoneNumber1"></label>
 				<input asp-for="ViewModel.PhoneNumber1" />
@@ -68,16 +63,6 @@
 				<span asp-validation-for="ViewModel.CellPhoneNumber2"></span>
 			</section-form-field>
 
-			<section-form-check>
-				<input asp-for="ViewModel.IsVerified" />
-				<label asp-for="ViewModel.IsVerified"></label>
-			</section-form-check>
-
-			<section-form-check>
-				<input asp-for="ViewModel.IsUndeletable" />
-				<label asp-for="ViewModel.IsUndeletable"></label>
-			</section-form-check>
-
 			<section-form-field>
 				<label asp-for="ViewModel.OpeningTime"></label>
 				<input asp-for="ViewModel.OpeningTime" />
@@ -89,6 +74,31 @@
 				<input asp-for="ViewModel.ClosingTime" />
 				<span asp-validation-for="ViewModel.ClosingTime"></span>
 			</section-form-field>
+
+			<section-form-field>
+				<label asp-for="ViewModel.CategoryId"></label>
+				<select class="form-select" asp-for="ViewModel.CategoryId"
+						asp-items="@(new SelectList(Model.categories,
+						nameof(ViewModels.Shared.KeyValueViewModel.Id),
+						nameof(ViewModels.Shared.KeyValueViewModel.Name)))">
+				</select>
+				<span asp-validation-for="ViewModel.CategoryId"></span>
+			</section-form-field>
+
+			<section-form-check>
+				<input asp-for="ViewModel.IsActive" />
+				<label asp-for="ViewModel.IsActive"></label>
+			</section-form-check>
+
+			<section-form-check>
+				<input asp-for="ViewModel.IsVerified" />
+				<label asp-for="ViewModel.IsVerified"></label>
+			</section-form-check>
+
+			<section-form-check>
+				<input asp-for="ViewModel.IsUndeletable" />
+				<label asp-for="ViewModel.IsUndeletable"></label>
+			</section-form-check>
 		</fieldset>
 
 		<section-form-buttons>
