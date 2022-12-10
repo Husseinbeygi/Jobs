@@ -1,4 +1,7 @@
-﻿namespace ViewModels.Pages.Admin.Users;
+﻿using System.ComponentModel.DataAnnotations;
+using Resources;
+
+namespace ViewModels.Pages.Admin.Users;
 
 public class UpdateViewModel : CommonViewModel
 {
@@ -7,9 +10,16 @@ public class UpdateViewModel : CommonViewModel
 	}
 
 	// **********
-	[System.ComponentModel.DataAnnotations.Display
-		(Name = nameof(Resources.DataDictionary.Id),
-		ResourceType = typeof(Resources.DataDictionary))]
-	public System.Guid? Id { get; set; }
+	[Display
+		(Name = nameof(DataDictionary.Id),
+		ResourceType = typeof(DataDictionary))]
+	public Guid? Id { get; set; }
+	// **********
+
+	// **********
+	[Display
+		(ResourceType = typeof(DataDictionary),
+		Name = nameof(DataDictionary.Role))]
+	public string? Role { get; init; }
 	// **********
 }

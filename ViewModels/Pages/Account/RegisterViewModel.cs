@@ -98,6 +98,23 @@
 
 		// **********
 		[System.ComponentModel.DataAnnotations.Display
+			(Name = nameof(Resources.DataDictionary.CellPhoneNumber),
+			ResourceType = typeof(Resources.DataDictionary))]
+
+		[System.ComponentModel.DataAnnotations.MaxLength
+			(Domain.SeedWork.Constants.FixedLength.CellPhoneNumber,
+			ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+			ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+
+		[System.ComponentModel.DataAnnotations.RegularExpression
+			(Domain.SeedWork.Constants.RegularExpression.CellPhoneNumber,
+			ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+			ErrorMessageResourceName = nameof(Resources.Messages.Validations.CellPhoneNumber))]
+		public string? CellPhoneNumber { get; set; }
+		// **********
+
+		// **********
+		[System.ComponentModel.DataAnnotations.Display
 			(Name = nameof(Resources.DataDictionary.EmailAddress),
 			ResourceType = typeof(Resources.DataDictionary))]
 
