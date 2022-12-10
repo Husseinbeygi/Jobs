@@ -58,19 +58,15 @@
 			</section-form-field>
 
 			<section-form-field>
-				<label asp-for="ViewModel.RoleId"></label>
+				<label asp-for="ViewModel.Role"></label>
 
-				<select class="form-select" asp-for="ViewModel.RoleId"
+				<select class="form-select" asp-for="ViewModel.Role"
 						asp-items="@(new SelectList(Model.RolesViewModel,
-						nameof(ViewModels.Shared.KeyValueViewModel.Id),
-						nameof(ViewModels.Shared.KeyValueViewModel.Name)))">
-
-					<option value="@(null)" selected>
-						@(Resources.DataDictionary.WithoutRole)
-					</option>
+						nameof(ViewModels.Shared.ValueNameViewModel.Value),
+						nameof(ViewModels.Shared.ValueNameViewModel.Name)))">
 				</select>
 
-				<span asp-validation-for="ViewModel.RoleId"></span>
+				<span asp-validation-for="ViewModel.Role"></span>
 			</section-form-field>
 
 			<section-form-check>

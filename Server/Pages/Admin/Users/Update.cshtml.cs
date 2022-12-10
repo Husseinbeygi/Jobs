@@ -1,5 +1,6 @@
 using Application.UserApp;
 using Domain.SeedWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,14 +9,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using ViewModels.Pages.Admin.Users;
 using ViewModels.Shared;
+using Infrastructure;
+using Resources;
 
 namespace Server.Pages.Admin.Users;
 
-[Microsoft.AspNetCore.Authorization.Authorize
-	(Roles = Infrastructure.Constants.Role.Admin)]
-public class UpdateModel : Infrastructure.BasePageModel
+[Authorize(Roles = Infrastructure.Constants.Role.Admin)]
+public class UpdateModel : BasePageModel
 {
-	#region Constructor(s)
 	public UpdateModel(ILogger<UpdateModel> logger,
 		IUserApplication userApplication)
 	{
@@ -23,16 +24,24 @@ public class UpdateModel : Infrastructure.BasePageModel
 		UserApplication = userApplication;
 		ViewModel = new();
 
-		RolesViewModel =
-			new System.Collections.Generic.List
-			<ViewModels.Shared.KeyValueViewModel>();
+		RolesViewModel = new List<ValueNameViewModel>();
+
+		var roles = typeof(Infrastructure.Constants.Role).GetFields();
+
+		foreach (var role in roles)
+		{
+			RolesViewModel.Add(new ValueNameViewModel()
+			{
+				Name = role.Name,
+				Value = role.Name,
+			});
+		}
 	}
-	#endregion /Constructor(s)
 
 
 	private ILogger<UpdateModel> Logger { get; }
 	public IUserApplication UserApplication { get; }
-	public List<KeyValueViewModel> RolesViewModel { get; private set; }
+	public List<ValueNameViewModel> RolesViewModel { get; private set; }
 
 
 	[BindProperty]
@@ -40,37 +49,34 @@ public class UpdateModel : Infrastructure.BasePageModel
 
 	public async Task<IActionResult> OnGetAsync(Guid? id)
 	{
+
 		try
 		{
 			if (id.HasValue == false)
 			{
-				AddToastError
-					(message: Resources.Messages.Errors.IdIsNull);
+				AddToastError(Resources.Messages.Errors.IdIsNull);
 
-				return RedirectToPage(pageName: "Index");
+				return RedirectToPage("Index");
 			}
 
 			ViewModel = (await UserApplication.GetUser(id.Value)).Data;
 
 			if (ViewModel == null)
 			{
-				AddToastError
-					(message: Resources.Messages.Errors.ThereIsNotAnyDataWithThisId);
+				AddToastError(Resources.Messages.Errors.ThereIsNotAnyDataWithThisId);
 
-				return RedirectToPage(pageName: "Index");
+				return RedirectToPage("Index");
 			}
 
 			return Page();
 		}
-		catch (System.Exception ex)
+		catch (Exception ex)
 		{
-			Logger.LogError
-				(message: Constants.Logger.ErrorMessage, args: ex.Message);
+			Logger.LogError(Domain.SeedWork.Constants.Logger.ErrorMessage, ex.Message);
 
-			AddToastError
-				(message: Resources.Messages.Errors.UnexpectedError);
+			AddToastError(Resources.Messages.Errors.UnexpectedError);
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage("Index");
 		}
 	}
 
@@ -83,11 +89,9 @@ public class UpdateModel : Infrastructure.BasePageModel
 
 		try
 		{
-
 			var res = await UserApplication.UpdateUser(ViewModel);
 
-			if (res.Succeeded == false ||
-				res.ErrorMessages.Count() > 0)
+			if (res.Succeeded == false || res.ErrorMessages.Count() > 0)
 			{
 				foreach (var item in res.ErrorMessages)
 				{
@@ -97,25 +101,21 @@ public class UpdateModel : Infrastructure.BasePageModel
 				return Page();
 			}
 
-			var successMessage = string.Format
-				(Resources.Messages.Successes.Updated,
-				Resources.DataDictionary.User);
+			var successMessage = string.Format(Resources.Messages.Successes.Updated, DataDictionary.User);
 
-			AddToastSuccess(message: successMessage);
+			AddToastSuccess(successMessage);
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage("Index");
 
 
 		}
-		catch (System.Exception ex)
+		catch (Exception ex)
 		{
-			Logger.LogError
-				(message: Constants.Logger.ErrorMessage, args: ex.Message);
+			Logger.LogError(Domain.SeedWork.Constants.Logger.ErrorMessage, ex.Message);
 
-			AddToastError
-				(message: Resources.Messages.Errors.UnexpectedError);
+			AddToastError(Resources.Messages.Errors.UnexpectedError);
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage("Index");
 		}
 
 	}
