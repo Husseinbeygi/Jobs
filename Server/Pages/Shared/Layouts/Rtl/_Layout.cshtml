@@ -6,7 +6,7 @@
 
 <!doctype html>
 
-<html lang="@(currentCultureName)" dir="ltr">
+<html lang="@(currentCultureName)" dir="rtl">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,7 +17,7 @@
 
 	<partial name="PartialViews/_FavoriteIcon" />
 
-	<partial name="PartialViews/Ltr/_StyleSheets" />
+	<partial name="PartialViews/Rtl/_StyleSheets" />
 
 	@(await RenderSectionAsync(name: "StyleSheets", required: false))
 </head>
@@ -35,7 +35,7 @@
 
 	<partial name="PartialViews/Ltr/_Footer" />
 
-	<partial name="PartialViews/Ltr/_Scripts" />
+	<partial name="PartialViews/Rtl/_Scripts" />
 
 	@(await RenderSectionAsync(name: "Scripts", required: false))
 </body>
