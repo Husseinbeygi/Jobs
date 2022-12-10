@@ -69,6 +69,7 @@
             public const int FirstName = 50;
             public const int LastName = 50;
 
+			public const int Comment = 4000;
             public const int Description = 4000;
             public const int Address = 4000;
             public const int Name_Job = 500;

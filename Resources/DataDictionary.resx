@@ -474,7 +474,31 @@
 	<data name="Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
-	<data name="Category" xml:space="preserve">
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Rate</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="IsEdited" xml:space="preserve">
+    <value>Is Edited</value>
+  </data>
+  <data name="JobId" xml:space="preserve">
+    <value>Job Id</value>
+  </data>
+  <data name="OwnerId" xml:space="preserve">
+    <value>Owner Id</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>User Id</value>
+  </data>
+  <data name="Category" xml:space="preserve">
     <value>Category</value>
   </data>
 	<data name="WithoutParent" xml:space="preserve">

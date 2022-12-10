@@ -214,6 +214,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string Comment {
+            get {
+                return ResourceManager.GetString("Comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string Comments {
+            get {
+                return ResourceManager.GetString("Comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Password.
         /// </summary>
         public static string ConfirmPassword {
@@ -547,6 +565,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is Edited.
+        /// </summary>
+        public static string IsEdited {
+            get {
+                return ResourceManager.GetString("IsEdited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is Email Address Verified.
         /// </summary>
         public static string IsEmailAddressVerified {
@@ -651,6 +678,15 @@ namespace Resources {
         public static string Jobs {
             get {
                 return ResourceManager.GetString("Jobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Id.
+        /// </summary>
+        public static string JobId {
+            get {
+                return ResourceManager.GetString("JobId", resourceCulture);
             }
         }
         
@@ -988,6 +1024,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Review.
+        /// </summary>
+        public static string Review {
+            get {
+                return ResourceManager.GetString("Review", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Right.
         /// </summary>
         public static string Right {
@@ -1164,6 +1209,15 @@ namespace Resources {
         public static string UserCount {
             get {
                 return ResourceManager.GetString("UserCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Id.
+        /// </summary>
+        public static string UserId {
+            get {
+                return ResourceManager.GetString("UserId", resourceCulture);
             }
         }
         

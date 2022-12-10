@@ -88,6 +88,15 @@ namespace Resources.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} successfully verified..
+        /// </summary>
+        public static string Verified {
+            get {
+                return ResourceManager.GetString("Verified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome {0}!.
         /// </summary>
         public static string Welcome {

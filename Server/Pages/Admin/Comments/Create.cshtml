@@ -1,0 +1,55 @@
+﻿@page
+@model Server.Pages.Admin.Comments.CreateModel
+@{
+	var pageTitle =
+		$"{Resources.ButtonCaptions.Create} {Resources.DataDictionary.Comment}";
+
+	ViewData[Infrastructure.ViewDataKeyNames.PageTitle] = pageTitle;
+
+	Layout = "Layouts/Admin/Rtl/_Layout";
+
+}
+
+<form method="post">
+
+	<section-form>
+		<fieldset>
+			<section-form-header>
+				@(pageTitle)
+			</section-form-header>
+
+			<partial name="PartialViews/_DisplayPageMessages" />
+
+			<section-form-field>
+				<label asp-for="ViewModel.Comment"></label>
+				<textarea asp-for="ViewModel.Comment"></textarea>
+				<span asp-validation-for="ViewModel.Comment"></span>
+			</section-form-field>
+
+			<section-form-field>
+				<label asp-for="ViewModel.Score"></label>
+				<input asp-for="ViewModel.Score" />
+				<span asp-validation-for="ViewModel.Score"></span>
+			</section-form-field>
+
+			<section-form-field>
+				<label asp-for="ViewModel.OwnerId"></label>
+				<input asp-for="ViewModel.OwnerId" />
+				<span asp-validation-for="ViewModel.OwnerId"></span>
+			</section-form-field>
+
+		</fieldset>
+
+		<section-form-buttons>
+			<button-create />
+			<button-reset />
+		</section-form-buttons>
+
+		<section-form-footer>
+			<a asp-page="Index">
+				@(Html.DtatGetLinkCaptionForList())
+			</a>
+		</section-form-footer>
+	</section-form>
+
+</form>
