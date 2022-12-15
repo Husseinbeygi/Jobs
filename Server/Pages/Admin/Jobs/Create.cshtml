@@ -37,13 +37,13 @@
 
             <section-form-field>
                 <label asp-for="ViewModel.OpeningTime"></label>
-                <input asp-for="ViewModel.OpeningTime" />
+                <input type="text" class="bs-timepicker" asp-for="ViewModel.OpeningTime" />
                 <span asp-validation-for="ViewModel.OpeningTime"></span>
             </section-form-field>
 
             <section-form-field>
                 <label asp-for="ViewModel.ClosingTime"></label>
-                <input asp-for="ViewModel.ClosingTime" />
+                <input type="text" class="bs-timepicker" asp-for="ViewModel.ClosingTime" />
                 <span asp-validation-for="ViewModel.ClosingTime"></span>
             </section-form-field>
 
