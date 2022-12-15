@@ -481,7 +481,7 @@
     <value>دسته بندی</value>
   </data>
   <data name="WithoutParent" xml:space="preserve">
-    <value>یتیم</value>
+    <value>بدون والد</value>
   </data>
   <data name="IsDeletable" xml:space="preserve">
     <value>قابل حذف</value>
@@ -512,5 +512,10 @@
   </data>
   <data name="Job" xml:space="preserve">
     <value>شغل</value>
+  <data name="EditorUserId" xml:space="preserve">
+    <value>کاربر ویرایش کننده</value>
+  </data>
+  <data name="WithoutChild" xml:space="preserve">
+    <value>بدون فرزند</value>
   </data>
 </root>

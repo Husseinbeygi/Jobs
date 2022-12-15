@@ -509,5 +509,10 @@
   </data>
   <data name="Job" xml:space="preserve">
     <value>Job</value>
+  <data name="EditorUserId" xml:space="preserve">
+    <value>Editor User Id</value>
+  </data>
+  <data name="WithoutChild" xml:space="preserve">
+    <value>Without Child</value>
   </data>
 </root>

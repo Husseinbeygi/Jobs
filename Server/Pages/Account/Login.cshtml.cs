@@ -58,6 +58,9 @@ namespace Server.Pages.Account
                     Username = "Admin",
                     Role = Role.Admin
 				};
+                // If Section AuthenticateUser is Complate Delete This Line.
+                // Paste UserId Here; For Use in Field EditorUserId in Category:
+                user.SetId(System.Guid.Parse("9e66689c-d76e-4322-a83d-cb534c4f9bf2"));
             }   
             else
             {
@@ -112,6 +115,14 @@ namespace Server.Pages.Account
             // **************************************************
             Claim claim = new Claim
                 (type: "FullName", value: string.Concat(user.FullName));
+            claims.Add(item: claim);
+            // **************************************************
+
+            // **************************************************
+            claim =
+                new Claim
+                (type: "Id", value: user.Id.ToString());
+
             claims.Add(item: claim);
             // **************************************************
 

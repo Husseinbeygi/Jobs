@@ -1,4 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.SeedWork;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ViewModels.Pages.Admin.Categories
 {
@@ -6,7 +12,7 @@ namespace ViewModels.Pages.Admin.Categories
     {
         public CommonViewModel()
         {
-            Ordering = 1_000;
+            Ordering = 10_000;
             IsActive = true;
             IsDeletable = false;
         }
@@ -20,18 +26,8 @@ namespace ViewModels.Pages.Admin.Categories
         [Display
             (ResourceType = typeof(Resources.DataDictionary),
             Name = nameof(Resources.DataDictionary.Name))]
-        [MinLength
-            (1)]
-        [MaxLength
-            (20)]
+        [MaxLength(Constants.MaxLength.Name2)]
         public string Name { get; set; }
-        // **********
-
-        // **********
-        [Display
-            (ResourceType = typeof(Resources.DataDictionary),
-            Name = nameof(Resources.DataDictionary.Parent))]
-        public Guid? ParentId { get; set; }
         // **********
 
         // **********

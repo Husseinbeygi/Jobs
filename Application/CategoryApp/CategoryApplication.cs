@@ -1,4 +1,5 @@
 ﻿using Domain.CategoryAgg;
+using Domain.UserAgg;
 using Framework;
 using Framework.OperationResult;
 using Resources;
@@ -10,17 +11,19 @@ namespace Application.CategoryApp
     public class CategoryApplication : ICategoryApplication
     {
         private readonly ICategoryRepository _repository;
+        private readonly IUserRepository _userRepository;
 
-        public CategoryApplication(ICategoryRepository repository)
+        public CategoryApplication(ICategoryRepository repository, IUserRepository userRepository)
         {
             _repository = repository;
+            _userRepository = userRepository;
         }
 
 
-        public async Task<OperationResult> AddCategory(CommonViewModel category)
+        public async Task<OperationResult> AddCategory(CreateViewModel category)
         {
             var res = new OperationResult();
-
+            
             category.Name = Utility.FixText(category.Name);
 
             if (string.IsNullOrWhiteSpace(category.Name))
@@ -36,10 +39,6 @@ namespace Application.CategoryApp
                 return res;
             }
 
-            // If CommonViewModel have ( ParentName ) this Code use.
-            //var resParent = await GetCategoryByName(category.ParentName);
-            //Guid? parentId = resParent.Succeeded ? resParent.Data.Id : null;
-
             Guid? parentId = null;
 
             if (category.ParentId != null)
@@ -54,6 +53,7 @@ namespace Application.CategoryApp
                 Ordering = category.Ordering,
                 IsActive = category.IsActive,
                 IsDeletable = category.IsDeletable,
+                EditorUserId = category.EditorUserId,
             };
 
             await _repository.CreateAsync(_category);
@@ -103,6 +103,8 @@ namespace Application.CategoryApp
             categoryForUpdate.Ordering = category.Ordering;
             categoryForUpdate.IsActive = category.IsActive;
             categoryForUpdate.IsDeletable = category.IsDeletable;
+            categoryForUpdate.EditorUserId = category.EditorUserId;
+            categoryForUpdate.SetUpdateDateTime();
 
             await _repository.SaveChangesAsync();
             res.Succeeded = true;
@@ -170,14 +172,24 @@ namespace Application.CategoryApp
                 return res;
             }
 
-            var parentId = (await _repository.GetAsync(Id)).ParentId;
-            var parentName = parentId.HasValue ? (await _repository.GetAsync(parentId.Value)).Name : null;
+            string? parentName = null;
+
+            if (category.ParentId.HasValue)
+            {
+                var parent = await _repository.GetAsync(category.ParentId.Value);
+                parentName = parent?.Name;
+            }
+
+            var editorUser = await _userRepository.GetAsync(category.EditorUserId);
 
             DetailsViewModel categoryForView = new()
             {
                 Id = category.Id,
                 Name = category.Name,
+                ParentId = category.ParentId,
                 ParentName = parentName,
+                EditorUserId = category.EditorUserId,
+                EditorUserName = editorUser?.Username,
                 Ordering = category.Ordering,
                 IsActive = category.IsActive,
                 IsDeletable = category.IsDeletable,
@@ -217,44 +229,60 @@ namespace Application.CategoryApp
             return res;
         }
 
-        public async Task<OperationResultWithData<Dictionary<IndexViewModel, List<IndexViewModel>>>> GetGroupedCategories()
+        public async Task<OperationResultWithData<List<IndexViewModel>>> GetIndexCategories(Guid? Id = null)
         {
-            var res = new OperationResultWithData<Dictionary<IndexViewModel, List<IndexViewModel>>>();
+            var res = new OperationResultWithData<List<IndexViewModel>>();
 
-            var categories = new Dictionary<IndexViewModel, List<IndexViewModel>>();
+            List<Category> categories = new();
 
-            var parents = await _repository.GetParents();
-
-            if (parents != null)
+            if (!Id.HasValue)
             {
-                foreach (var parent in parents)
+                categories = await _repository.GetParents();
+            }
+            else
+            {
+                var category = await _repository.GetAsync(Id.Value);
+
+                if (category == null)
                 {
-                    List<IndexViewModel> childs = new();
-
-                    foreach (var child in await _repository.GetChildsById(parent.Id))
-                    {
-                        childs.Add(new IndexViewModel()
-                        {
-                            Id = child.Id,
-                            Name = child.Name,
-                            IsActive = child.IsActive,
-                            IsDeletable = child.IsDeletable,
-                        });
-                    }
-
-                    categories.Add(new IndexViewModel()
-                    {
-                        Id = parent.Id,
-                        Name = parent.Name,
-                        IsActive = parent.IsActive,
-                        IsDeletable = parent.IsDeletable,
-                    }, childs);
+                    res.AddErrorMessage(string.Format(Errors.NotFound, DataDictionary.Category));
+                    res.Succeeded = false;
+                    return res;
                 }
+
+                categories = await _repository.GetChildsById(category.Id);
             }
 
-            res.Data = categories;
+
+            List<IndexViewModel> _categories = new();
+
+            foreach (var category in categories)
+            {
+                var childCount = await GetChildCount(category.Id);
+
+                _categories.Add(new()
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    Ordering = category.Ordering,
+                    IsActive = category.IsActive,
+                    IsDeletable = category.IsDeletable,
+                    ChildCount = childCount,
+                });
+            }
+
+            res.Data = _categories;
             res.Succeeded = true;
             return res;
+        }
+
+        public async Task<int> GetChildCount(Guid Id)
+        {
+            var childs = await _repository.GetChildsById(Id);
+
+            var countChilds = childs.Count;
+
+            return countChilds;
         }
     }
 }

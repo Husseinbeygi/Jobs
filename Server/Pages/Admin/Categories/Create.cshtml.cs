@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Resources;
 using Resources.Messages;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ViewModels.Pages.Admin.Categories;
 using ViewModels.Shared;
@@ -25,7 +27,7 @@ namespace Server.Pages.Admin.Categories
 
 
         [BindProperty]
-        public CommonViewModel ViewModel { get; set; }
+        public CreateViewModel ViewModel { get; set; }
         public List<KeyValueViewModel> ParentsViewModel { get; set; }
 
         public async Task Start()
@@ -53,6 +55,8 @@ namespace Server.Pages.Admin.Categories
                 return Page();
             }
 
+            var editorUserId = User.Claims.FirstOrDefault(x => x.Type == "Id").Value;
+            ViewModel.EditorUserId = Guid.Parse(editorUserId);
             var res = await _application.AddCategory(ViewModel);
 
             if (!res.Succeeded || res.ErrorMessages.Count > 0)
