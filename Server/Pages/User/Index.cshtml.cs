@@ -1,12 +1,11 @@
 using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Server.Pages.Admin
+namespace Server.Pages.User
 {
-    [Authorize(Roles = Constants.Role.Admin)]
-    public class IndexModel : PageModel
+    [Authorize]
+    public class IndexModel : BasePageModel
     {
         public void OnGet()
         {

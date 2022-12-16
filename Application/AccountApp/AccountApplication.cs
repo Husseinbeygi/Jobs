@@ -12,8 +12,7 @@ namespace Application.AccountApp
 		private readonly IUserApplication _userApplication;
 		private readonly IPasswordHasher _hasher;
 
-		public AccountApplication(
-			IUserApplication userApplication, IPasswordHasher hasher)
+		public AccountApplication(IUserApplication userApplication, IPasswordHasher hasher)
 		{
 			_userApplication = userApplication;
 			_hasher = hasher;
@@ -21,18 +20,16 @@ namespace Application.AccountApp
 
 		public async Task<OperationResult> RegisterUser(RegisterViewModel model)
 		{
-			return await _userApplication.AddUser(
-				new CreateViewModel
+			return await _userApplication.AddUser(new CreateViewModel
 			{
 				FullName = model.FullName,
 				Password = model.Password,
 				Username = model?.Username,
+				CellPhoneNumber = model?.CellPhoneNumber,
 				EmailAddress = model.EmailAddress,
 				IsActive = true,
 			});
 		}
-
-
 
 		public async Task<User> AuthenticateUser(LoginViewModel model)
 		{

@@ -4,6 +4,7 @@ public class CreateViewModel : CommonViewModel
 {
 	public CreateViewModel() : base()
 	{
+		Role = "User";
 	}
 
 	// **********
@@ -49,5 +50,12 @@ public class CreateViewModel : CommonViewModel
 	[System.ComponentModel.DataAnnotations.DataType
 		(dataType: System.ComponentModel.DataAnnotations.DataType.Password)]
 	public string? ConfirmPassword { get; set; }
+	// **********
+
+	// **********
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Role))]
+	public string? Role { get; init; }
 	// **********
 }

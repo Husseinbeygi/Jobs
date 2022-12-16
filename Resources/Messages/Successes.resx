@@ -129,4 +129,7 @@
   <data name="Verified" xml:space="preserve">
     <value>{0} successfully verified.</value>
   </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome {0}!</value>
+  </data>
 </root>

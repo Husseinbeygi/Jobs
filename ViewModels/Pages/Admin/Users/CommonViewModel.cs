@@ -4,6 +4,7 @@ public class CommonViewModel : object
 {
 	public CommonViewModel() : base()
 	{
+		Ordering = 10_000;
 	}
 
 

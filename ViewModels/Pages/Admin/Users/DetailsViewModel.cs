@@ -6,12 +6,6 @@ public class DetailsViewModel : UpdateViewModel
 	{
 	}
 
-	// **********
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Role))]
-	public string? Role { get; init; }
-	// **********
 
 	// **********
 	[System.ComponentModel.DataAnnotations.Display

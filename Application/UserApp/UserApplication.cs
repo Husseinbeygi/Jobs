@@ -2,6 +2,7 @@
 using Framework.OperationResult;
 using Framework.Password;
 using Resources.Messages;
+using Resources;
 using ViewModels.Pages.Admin.Users;
 
 namespace Application.UserApp
@@ -21,17 +22,28 @@ namespace Application.UserApp
 		{
 			var res = new OperationResult();
 
-			if (_repository.Exist(x => x.CellPhoneNumber == user.CellPhoneNumber ||
-			x.EmailAddress == user.EmailAddress))
+			if (_repository.Exist(x => x.Username == user.Username))
 			{
-				res.AddErrorMessage(Errors.AlreadyExists);
-				res.Succeeded = false;
-				return res;
+				res.AddErrorMessage(string.Format(Errors.AlreadyExists, DataDictionary.Username));
 			}
 
-			var fixedDescription =
-					Framework.Utility.FixText
-						(text: user.AdminDescription);
+			if (_repository.Exist(x => x.EmailAddress == user.EmailAddress))
+			{
+				res.AddErrorMessage(string.Format(Errors.AlreadyExists, DataDictionary.EmailAddress));
+			}
+
+			if (_repository.Exist(x => x.CellPhoneNumber == user.CellPhoneNumber) && user.CellPhoneNumber != null)
+			{
+				res.AddErrorMessage(string.Format(Errors.AlreadyExists, DataDictionary.CellPhoneNumber));
+			}
+
+            if (0 < res.ErrorMessages.Count)
+            {
+				res.Succeeded = false;
+				return res;
+            }
+
+			var fixedDescription = Framework.Utility.FixText(user.AdminDescription);
 
 			var hashedPassword = _hasher.Hash(user?.Password);
 
@@ -45,7 +57,9 @@ namespace Application.UserApp
 				IsProgrammer = user.IsProgrammer,
 				IsUndeletable = user.IsUndeletable,
 				CellPhoneNumber = user.CellPhoneNumber,
-				Role = "User",
+				Role = user.Role,
+				Username = user.Username,
+				FullName = user.FullName,
 			};
 
 			await _repository.CreateAsync(_user);
@@ -61,8 +75,7 @@ namespace Application.UserApp
 
 			if (userForDelete == null)
 			{
-				res.AddErrorMessage
-					(message: Errors.ThereIsNotAnyDataWithThisId);
+				res.AddErrorMessage(Errors.ThereIsNotAnyDataWithThisId);
 			}
 
 			CheckIfUserIsProgrammer(res, userForDelete);
@@ -80,41 +93,27 @@ namespace Application.UserApp
 			await _repository.SaveChangesAsync();
 			res.Succeeded = true;
 			return res;
-
 		}
 
-		private static void CheckIfUserIsUndeletable
-			(OperationResult res, User? userForDelete)
+		private static void CheckIfUserIsUndeletable(OperationResult res, User? userForDelete)
 		{
 			if (userForDelete.IsUndeletable)
 			{
-				var errorMessage = string.Format
-					(Resources.Messages.Errors.UnableTo,
-					Resources.ButtonCaptions.Delete,
-					Resources.DataDictionary.User);
+				var errorMessage = string.Format(Errors.UnableTo, ButtonCaptions.Delete, DataDictionary.User);
 
-				res.AddErrorMessage
-					(message: errorMessage);
-
+				res.AddErrorMessage(errorMessage);
 			}
 		}
 
-		private static void CheckIfUserIsProgrammer
-			(OperationResult res, User? userForDelete)
+		private static void CheckIfUserIsProgrammer(OperationResult res, User? userForDelete)
 		{
 			if (userForDelete.IsProgrammer)
 			{
-				var errorMessage = string.Format
-					(Resources.Messages.Errors.UnableTo,
-					Resources.ButtonCaptions.Delete,
-					Resources.DataDictionary.User);
+				var errorMessage = string.Format(Errors.UnableTo, ButtonCaptions.Delete, DataDictionary.User);
 
-				res.AddErrorMessage
-							(message: errorMessage);
-
+				res.AddErrorMessage(errorMessage);
 			}
 		}
-
 
 		public async Task<OperationResultWithData<User>> GetUserByUserName(string username)
 		{
@@ -161,22 +160,39 @@ namespace Application.UserApp
 
 		public async Task<OperationResult> UpdateUser(UpdateViewModel user)
 		{
-
 			var res = new OperationResult();
+
 			var userForUpdate = await _repository.GetAsync(user.Id.Value);
 
 			if (userForUpdate == null)
 			{
-				res.AddErrorMessage
-					(message: Errors.ThereIsNotAnyDataWithThisId);
-
+				res.AddErrorMessage(Errors.ThereIsNotAnyDataWithThisId);
 				res.Succeeded = false;
 				return res;
 			}
 
-			var fixedAdminDescription =
-				Framework.Utility.FixText
-					(text: user.AdminDescription);
+			if (_repository.Exist(x => x.Username == user.Username) && user.Username != userForUpdate.Username)
+			{
+				res.AddErrorMessage(string.Format(Errors.AlreadyExists, DataDictionary.Username));
+			}
+
+			if (_repository.Exist(x => x.EmailAddress == user.EmailAddress) && user.EmailAddress != userForUpdate.EmailAddress)
+			{
+				res.AddErrorMessage(string.Format(Errors.AlreadyExists, DataDictionary.EmailAddress));
+			}
+
+			if (_repository.Exist(x => x.CellPhoneNumber == user.CellPhoneNumber) && user.CellPhoneNumber != userForUpdate.CellPhoneNumber && user.CellPhoneNumber != null)
+			{
+				res.AddErrorMessage(string.Format(Errors.AlreadyExists, DataDictionary.CellPhoneNumber));
+			}
+
+			if (0 < res.ErrorMessages.Count)
+			{
+				res.Succeeded = false;
+				return res;
+			}
+
+			var fixedAdminDescription = Framework.Utility.FixText(user.AdminDescription);
 
 			userForUpdate.SetUpdateDateTime();
 
@@ -187,6 +203,7 @@ namespace Application.UserApp
 			userForUpdate.AdminDescription = fixedAdminDescription;
 			userForUpdate.FullName = user.FullName;
 			userForUpdate.Username = user.Username;
+			userForUpdate.Role = user.Role;
 
 
 			await _repository.SaveChangesAsync();

@@ -1,69 +1,74 @@
 ﻿using Application.UserApp;
+using Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Resources;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ViewModels.Pages.Admin.Users;
 using ViewModels.Shared;
 
-namespace Server.Pages.Admin.Users;
-
-[Microsoft.AspNetCore.Authorization.Authorize
-	(Roles = Infrastructure.Constants.Role.Admin)]
-public class CreateModel : Infrastructure.BasePageModel
+namespace Server.Pages.Admin.Users
 {
-	public CreateModel(ILogger<CreateModel> logger,
-		IUserApplication userApplication)
-	{
-		Logger = logger;
-		UserApplication = userApplication;
-		UserApplication = userApplication;
-		ViewModel = new();
 
-		RolesViewModel = new List<KeyValueViewModel>();
-	}
+    [Authorize(Roles = Constants.Role.Admin)]
+    public class CreateModel : BasePageModel
+    {
+        public CreateModel(IUserApplication userApplication)
+        {
+            UserApplication = userApplication;
+            UserApplication = userApplication;
+            ViewModel = new();
 
-	private ILogger<CreateModel> Logger { get; }
-	private IUserApplication UserApplication { get; }
+            RolesViewModel = new List<ValueNameViewModel>();
+        }
 
-	public IList<KeyValueViewModel> RolesViewModel { get; private set; }
+        private IUserApplication UserApplication { get; }
+        public IList<ValueNameViewModel> RolesViewModel { get; private set; }
 
-	[BindProperty]
-	public CreateViewModel ViewModel { get; set; }
+        [BindProperty]
+        public CreateViewModel ViewModel { get; set; }
 
-	public async Task OnGetAsync()
-	{
-	}
+        public async Task OnGetAsync()
+        {
+            var roles = typeof(Constants.Role).GetFields();
 
-	public async Task<IActionResult> OnPostAsync()
-	{
-		if (ModelState.IsValid == false)
-		{
-			return Page();
-		}
+            foreach (var role in roles)
+            {
+                RolesViewModel.Add(new ValueNameViewModel()
+                {
+                    Name = role.Name,
+                    Value = role.Name,
+                });
+            }
+        }
 
-		var res = await UserApplication.AddUser(ViewModel);
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (ModelState.IsValid == false)
+            {
+                return Page();
+            }
 
-		if (res.Succeeded == false ||
-			res.ErrorMessages.Count() > 0)
-		{
-			foreach (var item in res.ErrorMessages)
-			{
-				AddToastError(item);
-			}
+            var res = await UserApplication.AddUser(ViewModel);
 
-			return Page();
-		}
+            if (res.Succeeded == false || res.ErrorMessages.Count() > 0)
+            {
+                foreach (var item in res.ErrorMessages)
+                {
+                    AddToastError(item);
+                }
 
-		var successMessage = string.Format
-				(format: Resources.Messages.Successes.Created,
-				arg0: Resources.DataDictionary.User);
+                return Page();
+            }
 
-		AddToastSuccess(message: successMessage);
+            var successMessage = string.Format(Resources.Messages.Successes.Created, DataDictionary.User);
 
-		return RedirectToPage("Index");
+            AddToastSuccess(successMessage);
 
-	}
+            return RedirectToPage("Index");
+        }
 
+    }
 }
