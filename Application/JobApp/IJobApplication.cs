@@ -11,7 +11,7 @@ namespace Application.JobApp
 {
     public interface IJobApplication
     {
-        Task<OperationResult> AddJob(CreateViewModel job);
+        Task<OperationResult> AddJob(CommonViewModel job);
         Task<OperationResult> DeleteJob(Guid Id);
         Task<OperationResult> UpdateJob(UpdateViewModel job);
         Task<OperationResultWithData<DetailsViewModel>> GetJob(Guid Id);

@@ -22,48 +22,51 @@
 		<section-form-field>
 			<label asp-for="ViewModel.Name"></label>
 			<input asp-for="ViewModel.Name" />
-			<span asp-validation-for="ViewModel.Name"></span>
 		</section-form-field>
 
 		<section-form-field>
 			<label asp-for="ViewModel.Description"></label>
 			<input asp-for="ViewModel.Description" />
-			<span asp-validation-for="ViewModel.Description"></span>
 		</section-form-field>
 
 		<section-form-field>
 			<label asp-for="ViewModel.Address"></label>
 			<input asp-for="ViewModel.Address" />
-			<span asp-validation-for="ViewModel.Address"></span>
 		</section-form-field>
-
-		<section-form-check>
-			<input asp-for="ViewModel.IsActive" />
-			<label asp-for="ViewModel.IsActive"></label>
-		</section-form-check>
 
 		<section-form-field>
 			<label asp-for="ViewModel.PhoneNumber1"></label>
 			<input asp-for="ViewModel.PhoneNumber1" />
-			<span asp-validation-for="ViewModel.PhoneNumber1"></span>
 		</section-form-field>
 
 		<section-form-field>
 			<label asp-for="ViewModel.PhoneNumber2"></label>
 			<input asp-for="ViewModel.PhoneNumber2" />
-			<span asp-validation-for="ViewModel.PhoneNumber2"></span>
 		</section-form-field>
 
 		<section-form-field>
 			<label asp-for="ViewModel.CellPhoneNumber1"></label>
 			<input asp-for="ViewModel.CellPhoneNumber1" />
-			<span asp-validation-for="ViewModel.CellPhoneNumber1"></span>
 		</section-form-field>
 
 		<section-form-field>
 			<label asp-for="ViewModel.CellPhoneNumber2"></label>
 			<input asp-for="ViewModel.CellPhoneNumber2" />
-			<span asp-validation-for="ViewModel.CellPhoneNumber2"></span>
+		</section-form-field>
+
+		<section-form-field>
+				<label asp-for="ViewModel.CategoryId"></label>
+			<input asp-for="@(Model.category.Data.Name)" />
+		</section-form-field>
+
+		<section-form-field>
+			<label asp-for="ViewModel.OpeningTime"></label>
+			<input asp-for="ViewModel.OpeningTime" />
+		</section-form-field>
+
+		<section-form-field>
+			<label asp-for="ViewModel.ClosingTime"></label>
+			<input asp-for="ViewModel.ClosingTime" />
 		</section-form-field>
 
 		<section-form-check>
@@ -76,17 +79,10 @@
 			<label asp-for="ViewModel.IsUndeletable"></label>
 		</section-form-check>
 
-		<section-form-field>
-			<label asp-for="ViewModel.OpeningTime"></label>
-			<input asp-for="ViewModel.OpeningTime" />
-			<span asp-validation-for="ViewModel.OpeningTime"></span>
-		</section-form-field>
-
-		<section-form-field>
-			<label asp-for="ViewModel.ClosingTime"></label>
-			<input asp-for="ViewModel.ClosingTime" />
-			<span asp-validation-for="ViewModel.ClosingTime"></span>
-		</section-form-field>
+		<section-form-check>
+			<input asp-for="ViewModel.IsActive" />
+			<label asp-for="ViewModel.IsActive"></label>
+		</section-form-check>
 	</fieldset>
 
 	<section-form-footer>

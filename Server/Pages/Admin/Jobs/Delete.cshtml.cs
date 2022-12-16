@@ -8,6 +8,9 @@ using System;
 using ViewModels.Pages.Admin.Job;
 using Domain.SeedWork;
 using System.Linq;
+using Application.CategoryApp;
+using Framework.OperationResult;
+using Domain.CategoryAgg;
 
 namespace Server.Pages.Admin.Jobs;
 
@@ -15,15 +18,22 @@ namespace Server.Pages.Admin.Jobs;
     (Roles = Infrastructure.Constants.Role.Admin)]
 public class DeleteModel : Infrastructure.BasePageModel
 {
-    public DeleteModel(ILogger<DeleteModel> logger, IJobApplication jobApplication)
+    public DeleteModel(ILogger<DeleteModel> logger, IJobApplication jobApplication,
+                       ICategoryApplication categoryApplication)
     {
         Logger = logger;
         JobApplication = jobApplication;
+        CategoryApplication = categoryApplication;
         ViewModel = new();
     }
 
     private ILogger<DeleteModel> Logger { get; }
+
     public IJobApplication JobApplication { get; }
+
+    private ICategoryApplication CategoryApplication { get; }
+
+    public OperationResultWithData<ViewModels.Pages.Admin.Categories.DetailsViewModel> category { get; set; }
 
     [BindProperty]
     public DetailsViewModel ViewModel { get; private set; }
@@ -49,6 +59,8 @@ public class DeleteModel : Infrastructure.BasePageModel
 
                 return RedirectToPage(pageName: "Index");
             }
+
+            category = await CategoryApplication.GetCategory(ViewModel.CategoryId);
 
             return Page();
         }

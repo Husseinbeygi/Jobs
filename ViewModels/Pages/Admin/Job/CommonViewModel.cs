@@ -125,5 +125,19 @@ namespace ViewModels.Pages.Admin.Job
         ResourceType = typeof(Resources.DataDictionary))]
         public bool IsVerified { get; set; }
         // **********
+
+        // **********
+        [Display(
+        ResourceType = typeof(Resources.DataDictionary),
+        Name = nameof(Resources.DataDictionary.OwnerId))]
+        public Guid OwnerId { get; set; }
+        // **********
+
+        // **********
+        [Display(
+        ResourceType = typeof(Resources.DataDictionary),
+        Name = nameof(Resources.DataDictionary.Category))]
+        public Guid CategoryId { get; set; }
+        // **********
     }
 }

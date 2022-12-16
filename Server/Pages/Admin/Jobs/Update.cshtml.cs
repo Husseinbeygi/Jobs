@@ -1,5 +1,6 @@
 using Application.JobApp;
 using Application.UserApp;
+using Domain.CategoryAgg;
 using Domain.SeedWork;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -17,21 +18,38 @@ namespace Server.Pages.Admin.Jobs;
 public class UpdateModel : Infrastructure.BasePageModel
 {
     public UpdateModel(ILogger<UpdateModel> logger,
-        IJobApplication jobApplication)
+        IJobApplication jobApplication, ICategoryRepository categoryRepository)
     {
         Logger = logger;
         JobApplication = jobApplication;
+        CategoryRepository = categoryRepository;
         ViewModel = new();
+        categories = new();
     }
 
     private ILogger<UpdateModel> Logger { get; }
+
     public IJobApplication JobApplication { get; }
+
+    private ICategoryRepository CategoryRepository { get; }
+
+    public List<KeyValueViewModel> categories { get; set; }
 
     [BindProperty]
     public UpdateViewModel ViewModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
+        var Categories = (await CategoryRepository.GetParents());
+        foreach (var category in Categories)
+        {
+            categories.Add(new KeyValueViewModel()
+            {
+                Id = category.Id,
+                Name = category.Name,
+            });
+        }
+
         try
         {
             if (id.HasValue == false)
