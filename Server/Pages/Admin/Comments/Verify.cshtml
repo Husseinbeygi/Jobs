@@ -1,0 +1,65 @@
+﻿@page
+@model Server.Pages.Admin.Comments.VerifyModel
+
+@{
+	var pageTitle =
+		$"{Resources.ButtonCaptions.Verify} {Resources.DataDictionary.Comment}";
+
+	ViewData[Infrastructure.ViewDataKeyNames.PageTitle] = pageTitle;
+
+	Layout = "Layouts/Admin/Rtl/_Layout";
+
+}
+
+<section-form>
+	<fieldset disabled>
+		<section-form-header>
+			@(pageTitle)
+		</section-form-header>
+
+		<partial name="PartialViews/_DisplayPageMessages" />
+
+		<section-form-field>
+			<label asp-for="ViewModel.Id"></label>
+			<input asp-for="ViewModel.Id" />
+		</section-form-field>
+
+		<section-form-field>
+			<label asp-for="ViewModel.Comment"></label>
+			<input asp-for="ViewModel.Comment" />
+		</section-form-field>
+
+		<section-form-field>
+			<label asp-for="ViewModel.Score"></label>
+			<input asp-for="ViewModel.Score" />
+		</section-form-field>
+
+		<section-form-check>
+			<input asp-for="ViewModel.IsEdited" />
+			<label asp-for="ViewModel.IsEdited"></label>
+		</section-form-check>
+
+		<section-form-check>
+			<input asp-for="ViewModel.IsDeleted" />
+			<label asp-for="ViewModel.IsDeleted"></label>
+		</section-form-check>
+
+
+	</fieldset>
+
+	<form method="post">
+		<section-form-buttons>
+			<input type="hidden" asp-for="ViewModel.Id" />
+			<button-verify />
+		</section-form-buttons>
+	</form>
+
+	<section-form-footer>
+		<a asp-page="Index">
+			@(Html.DtatGetLinkCaptionForList())
+		</a>
+		<a asp-page="Delete" asp-route-id="@(Model.ViewModel.Id)">
+			@(Html.DtatGetLinkCaptionForDelete())
+		</a>
+	</section-form-footer>
+</section-form>

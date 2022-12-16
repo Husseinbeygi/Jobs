@@ -47,6 +47,19 @@ namespace Infrastructure.TagHelpers
 			return icon;
 		}
 
+		public static Microsoft.AspNetCore.Mvc.Rendering.TagBuilder GetIconVerify()
+		{
+			var icon =
+				new Microsoft.AspNetCore.Mvc
+				.Rendering.TagBuilder(tagName: "i");
+
+			icon.AddCssClass(value: "mx-1");
+			icon.AddCssClass(value: "bi");
+			icon.AddCssClass(value: "bi-check");
+
+			return icon;
+		}
+
 		public static Microsoft.AspNetCore.Mvc.Rendering.TagBuilder GetIconUpdate()
 		{
 			var icon =

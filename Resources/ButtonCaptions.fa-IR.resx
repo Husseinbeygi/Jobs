@@ -189,4 +189,7 @@
   <data name="Update" xml:space="preserve">
     <value>ویرایش</value>
   </data>
+  <data name="Verify" xml:space="preserve">
+    <value>تایید</value>
+  </data>
 </root>
