@@ -507,8 +507,9 @@
   <data name="Jobs" xml:space="preserve">
     <value>Jobs</value>
   </data>
-  <data name="Job" xml:space="preserve">
+<data name="Job" xml:space="preserve">
     <value>Job</value>
+</data>
   <data name="EditorUserId" xml:space="preserve">
     <value>Editor User Id</value>
   </data>
