@@ -35,6 +35,18 @@ public class CreateModel : Infrastructure.BasePageModel
     public List<KeyValueViewModel> categories { get; set; }
 
     [BindProperty]
+    public int hour_open { get; set; }
+
+    [BindProperty]
+    public int minutes_open { get; set; }
+
+    [BindProperty]
+    public int hour_close { get; set; }
+
+    [BindProperty]
+    public int minutes_close { get; set; }
+
+    [BindProperty]
     public CommonViewModel ViewModel { get; set; }
 
     public async Task OnGetAsync()
@@ -56,6 +68,9 @@ public class CreateModel : Infrastructure.BasePageModel
         {
             return Page();
         }
+
+        ViewModel.OpeningTime = TimeSpan.Parse($"{ hour_open }:{minutes_open}:00");
+        ViewModel.ClosingTime = TimeSpan.Parse($"{hour_close}:{minutes_close}:00");
 
         var res = await JobApplication.AddJob(ViewModel);
 

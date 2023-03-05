@@ -512,11 +512,17 @@
   </data>
   <data name="Job" xml:space="preserve">
     <value>شغل</value>
-  </data>	  
+  </data>
   <data name="EditorUserId" xml:space="preserve">
     <value>کاربر ویرایش کننده</value>
   </data>
   <data name="WithoutChild" xml:space="preserve">
     <value>بدون فرزند</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>ساعت</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>دقیقه</value>
   </data>
 </root>

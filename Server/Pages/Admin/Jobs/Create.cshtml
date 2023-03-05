@@ -37,13 +37,61 @@
 
             <section-form-field>
                 <label asp-for="ViewModel.OpeningTime"></label>
-                <input type="text" asp-for="ViewModel.OpeningTime" />
+                <div class="row">
+                    <div class="col-6">
+                        <label>@(Resources.DataDictionary.Hour)</label>
+                        <select class="form-control" asp-for="hour_open">
+                            @for (var i = 0; i < 24; i++)
+                            {
+                                <option>
+                                    @i
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-6">
+                        <label>@(Resources.DataDictionary.Minutes)</label>
+                        <select class="form-control" asp-for="minutes_open">
+                            @for (var i = 0; i < 60; i = i + 15)
+                            {
+                                 <option>
+                                    @i
+                                  </option>
+                            }
+                        </select>
+                    </div>
+                </div>
                 <span asp-validation-for="ViewModel.OpeningTime"></span>
             </section-form-field>
 
             <section-form-field>
                 <label asp-for="ViewModel.ClosingTime"></label>
-                <input type="text" asp-for="ViewModel.ClosingTime" />
+                <div class="row">
+                    <div class="col-6">
+                        <label>@(Resources.DataDictionary.Hour)</label>
+                        <select class="form-control" asp-for="hour_close">
+                            @for (var i = 0; i < 24; i++)
+                            {
+                                <option>
+                                    @i
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-6">
+                        <label>@(Resources.DataDictionary.Minutes)</label>
+                        <select class="form-control" asp-for="minutes_close">
+                            @for (var i = 0; i < 60; i = i + 15)
+                            {
+                                <option>
+                                    @i
+                                </option>
+                            }
+                        </select>
+                    </div>
+                </div>
                 <span asp-validation-for="ViewModel.ClosingTime"></span>
             </section-form-field>
 
