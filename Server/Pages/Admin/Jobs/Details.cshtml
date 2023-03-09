@@ -61,12 +61,30 @@
 
 		<section-form-field>
 			<label asp-for="ViewModel.OpeningTime"></label>
-			<input asp-for="ViewModel.OpeningTime" />
+			<div class="row">
+				<div class="col-6">
+					<label>@(Resources.DataDictionary.Hour)</label>
+					<input class="form-control" asp-for="ViewModel.OpeningTime.Hours" />
+				</div>
+				<div class="col-6">
+					<label>@(Resources.DataDictionary.Minutes)</label>
+					<input class="form-control" asp-for="ViewModel.OpeningTime.Minutes" />
+				</div>
+			</div>
 		</section-form-field>
 
 		<section-form-field>
 			<label asp-for="ViewModel.ClosingTime"></label>
-			<input asp-for="ViewModel.ClosingTime" />
+			<div class="row">
+				<div class="col-6">
+					<label>@(Resources.DataDictionary.Hour)</label>
+					<input class="form-control" asp-for="ViewModel.ClosingTime.Hours" />
+				</div>
+				<div class="col-6">
+					<label>@(Resources.DataDictionary.Minutes)</label>
+					<input class="form-control" asp-for="ViewModel.ClosingTime.Minutes" />
+				</div>
+			</div>
 		</section-form-field>
 
 		<section-form-check>

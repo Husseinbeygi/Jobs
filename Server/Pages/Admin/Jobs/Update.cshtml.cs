@@ -36,6 +36,18 @@ public class UpdateModel : Infrastructure.BasePageModel
     public List<KeyValueViewModel> categories { get; set; }
 
     [BindProperty]
+    public int hour_open { get; set; }
+
+    [BindProperty]
+    public int minutes_open { get; set; }
+
+    [BindProperty]
+    public int hour_close { get; set; }
+
+    [BindProperty]
+    public int minutes_close { get; set; }
+
+    [BindProperty]
     public UpdateViewModel ViewModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
@@ -61,6 +73,11 @@ public class UpdateModel : Infrastructure.BasePageModel
             }
 
             ViewModel = (await JobApplication.GetJob(id.Value)).Data;
+
+            hour_open = ViewModel.OpeningTime.Hours;
+            hour_close = ViewModel.ClosingTime.Hours;
+            minutes_open = ViewModel.OpeningTime.Minutes;
+            minutes_close = ViewModel.ClosingTime.Minutes;
 
             if (ViewModel == null)
             {
@@ -93,6 +110,9 @@ public class UpdateModel : Infrastructure.BasePageModel
 
         try
         {
+
+            ViewModel.OpeningTime = TimeSpan.Parse($"{hour_open}:{minutes_open}:00");
+            ViewModel.ClosingTime = TimeSpan.Parse($"{hour_close}:{minutes_close}:00");
 
             var res = await JobApplication.UpdateJob(ViewModel);
 

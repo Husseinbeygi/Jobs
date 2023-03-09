@@ -534,10 +534,18 @@
 	<data name="Job" xml:space="preserve">
     <value>Job</value>
   </data>
+  <data name="EditorUserId" xml:space="preserve">
+  </data>
 	<data name="EditorUserId" xml:space="preserve">
     <value>Editor User Id</value>
   </data>
 	<data name="WithoutChild" xml:space="preserve">
     <value>Without Child</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>Hour</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>Minutes</value>
   </data>
 </root>
