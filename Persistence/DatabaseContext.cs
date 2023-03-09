@@ -1,6 +1,7 @@
 ﻿using Domain.JobAgg;
 using Domain.CategoryAgg;
 using Domain.UserAgg;
+using Domain.CommentAgg;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
@@ -11,19 +12,15 @@ namespace Persistence
 
 		public DbSet<Job> Jobs { get; set; }
 		public DbSet<Category> Categories { get; set; }
+		public DbSet<Comment> Comments { get; set; }
 		public DatabaseContext(DbContextOptions options) : base(options)
 		{
-			Database.EnsureCreated();	
+			//Database.EnsureCreated();	
 		}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-			modelBuilder.Entity<Category>()
-				.HasOne(Category => Category.User)
-				.WithMany(User => User.CategoriesEdited)
-				.HasForeignKey(Category => Category.EditorUserId);
         }
 
     }

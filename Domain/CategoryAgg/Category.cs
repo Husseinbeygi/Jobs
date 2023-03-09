@@ -54,13 +54,8 @@ namespace Domain.CategoryAgg
 
 
         // **********
-        [Column(nameof(EditorUserId))]
-        [Required
-            (AllowEmptyStrings = false,
-            ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-            ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
         public Guid EditorUserId { get; set; }
-        public User User { get; set; }
+        public User EditorUser { get; set; }
         // **********
 
         public void SetUpdateDateTime()
