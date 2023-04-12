@@ -7,6 +7,14 @@ namespace ViewModels.Pages.Admin.Owner
     public class CommonViewModel
     {
         // **********
+        [Display
+        (ResourceType = typeof(Resources.DataDictionary),
+        Name = nameof(Resources.DataDictionary.Id))]
+
+        public Guid? Id { get; set; }
+        // **********
+
+        // **********
         [MaxLength
         (length: Constants.MaxLength.FullName,
         ErrorMessageResourceType = typeof(Validations),
@@ -79,9 +87,17 @@ namespace ViewModels.Pages.Admin.Owner
         // **********
         [Display
         (ResourceType = typeof(Resources.DataDictionary),
+        Name = nameof(Resources.DataDictionary.InsertDateTime))]
+
+        public DateTime InsertDateTime { get; set; }
+        // **********
+
+        // **********
+        [Display
+        (ResourceType = typeof(Resources.DataDictionary),
         Name = nameof(Resources.DataDictionary.UpdateDateTime))]
 
-        public DateTime UpdateDateTime { get; private set; }
+        public DateTime UpdateDateTime { get; set; }
         // **********
     }
 }
