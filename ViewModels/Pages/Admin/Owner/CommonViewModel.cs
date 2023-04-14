@@ -22,7 +22,7 @@ namespace ViewModels.Pages.Admin.Owner
 
         [Display
         (ResourceType = typeof(Resources.DataDictionary),
-        Name = nameof(Resources.DataDictionary.FullName))]
+        Name = nameof(Resources.DataDictionary.FirstName))]
 
         public string FName { get; set; }
         // **********
