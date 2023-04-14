@@ -1,4 +1,5 @@
-﻿using Domain.SeedWork;
+﻿using Domain.JobAgg;
+using Domain.SeedWork;
 using Resources.Messages;
 using System.ComponentModel.DataAnnotations;
 
@@ -83,7 +84,7 @@ namespace Domain.OwnerAgg
         (ResourceType = typeof(Resources.DataDictionary),
         Name = nameof(Resources.DataDictionary.Jobs))]
 
-        public List<Guid> JobId { get; set; }
+        public List<Job> JobId { get; set; }
         // **********
     }
 }

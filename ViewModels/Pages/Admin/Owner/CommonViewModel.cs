@@ -56,14 +56,6 @@ namespace ViewModels.Pages.Admin.Owner
         // **********
         [Display
         (ResourceType = typeof(Resources.DataDictionary),
-        Name = nameof(Resources.DataDictionary.Jobs))]
-
-        public List<Guid> JobId { get; set; }
-        // **********
-
-        // **********
-        [Display
-        (ResourceType = typeof(Resources.DataDictionary),
         Name = nameof(Resources.DataDictionary.IsActive))]
 
         public bool IsActive { get; set; }

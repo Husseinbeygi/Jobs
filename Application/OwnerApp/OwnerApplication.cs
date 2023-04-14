@@ -37,7 +37,6 @@ namespace Application.OwnerApp
             {
                 FName = owner.FName,
                 LName = owner.LName,
-                JobId = owner.JobId,
                 PhoneNumber = owner.PhoneNumber,
                 IsUndeletable = owner.IsUndeletable,
                 IsActive = owner.IsActive,
@@ -107,7 +106,6 @@ namespace Application.OwnerApp
                     FName = owner.FName,
                     LName = owner.LName,
                     PhoneNumber = owner.PhoneNumber,
-                    JobId = owner.JobId,
                     InsertDateTime = owner.InsertDateTime,
                     IsActive = owner.IsActive,
                     IsSystemic = owner.IsSystemic,
@@ -133,7 +131,6 @@ namespace Application.OwnerApp
                 FName = owner.FName,
                 LName = owner.LName,
                 PhoneNumber = owner.PhoneNumber,
-                JobId = owner.JobId,
                 InsertDateTime = owner.InsertDateTime,
                 IsActive = owner.IsActive,
                 IsSystemic = owner.IsSystemic,
@@ -178,7 +175,6 @@ namespace Application.OwnerApp
             ownerForUpdate.IsUndeletable = owner.IsUndeletable;
             ownerForUpdate.FName = owner.FName;
             ownerForUpdate.LName = owner.LName;
-            ownerForUpdate.JobId = owner.JobId;
             ownerForUpdate.PhoneNumber = owner.PhoneNumber;
 
             await _repository.SaveChangesAsync();

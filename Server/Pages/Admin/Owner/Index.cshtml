@@ -51,9 +51,6 @@
 					@(Resources.DataDictionary.IsSystemic)
 				</th>
 				<th>
-					@(Resources.DataDictionary.Jobs)
-				</th>
-				<th>
 					@(Resources.DataDictionary.InsertDateTime)
 				</th>
 				<th>
@@ -103,10 +100,6 @@
 					@(Html.DtatDisplayBooleanWithTd(value: item.IsUndeletable))
 
 					@(Html.DtatDisplayBooleanWithTd(value: item.IsSystemic))
-
-					<td>
-						@(item.JobId)
-					</td>
 
 					@(Html.DtatDisplayDateTimeWithTd(value: item.InsertDateTime))
 
