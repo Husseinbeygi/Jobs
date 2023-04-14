@@ -1,5 +1,7 @@
 using Application.JobApp;
+using Application.OwnerApp;
 using Domain.CategoryAgg;
+using Domain.OwnerAgg;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,13 +20,15 @@ namespace Server.Pages.Admin.Jobs;
 public class CreateModel : Infrastructure.BasePageModel
 {
     public CreateModel(ILogger<CreateModel> logger, IJobApplication jobApplication,
-                       ICategoryRepository categoryRepository)
+                       ICategoryRepository categoryRepository, IOwnerRepository ownerRepository)
     {
         Logger = logger;
         JobApplication = jobApplication;
         CategoryRepository = categoryRepository;
+        OwnerRepository = ownerRepository;
         ViewModel = new();
         categories = new();
+        owners = new();
     }
     private ILogger<CreateModel> Logger { get; }
 
@@ -32,7 +36,11 @@ public class CreateModel : Infrastructure.BasePageModel
 
     private ICategoryRepository CategoryRepository { get; }
 
+    private IOwnerRepository OwnerRepository { get; }
+
     public List<KeyValueViewModel> categories { get; set; }
+
+    public List<KeyValueViewModel> owners { get; set; }
 
     [BindProperty]
     public int hour_open { get; set; }
@@ -58,6 +66,16 @@ public class CreateModel : Infrastructure.BasePageModel
             {
                 Id = category.Id,
                 Name = category.Name,
+            });
+        }
+
+        var Owners = await OwnerRepository.GetAllAsync();
+        foreach (var owner in Owners)
+        {
+            owners.Add(new KeyValueViewModel()
+            {
+                Id = owner.Id,
+                Name = owner.LName,
             });
         }
     }

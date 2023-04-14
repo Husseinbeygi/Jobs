@@ -108,6 +108,7 @@ namespace Application.JobApp
                     Description = job.Description,
                     PhoneNumber1 = job.PhoneNumber1,
                     CategoryId = job.CategoryId,
+                    OwnerId = job.OwnerId,
                     IsActive = job.IsActive,
                     IsDeletable = job.IsDeletable,
                     OpeningTime = job.OpeningTime,
@@ -140,6 +141,7 @@ namespace Application.JobApp
                 CellPhoneNumber1 = job.CellPhoneNumber1,
                 CellPhoneNumber2 = job.CellPhoneNumber2,
                 CategoryId = job.CategoryId,
+                OwnerId=job.OwnerId,
                 IsActive = job.IsActive,
                 IsDeletable = job.IsDeletable,
                 OpeningTime = job.OpeningTime,
@@ -197,6 +199,7 @@ namespace Application.JobApp
             jobForUpdate.CellPhoneNumber1 = job.CellPhoneNumber1;
             jobForUpdate.CellPhoneNumber2 = job.CellPhoneNumber2;
             jobForUpdate.CategoryId = job.CategoryId;
+            jobForUpdate.OwnerId = job.OwnerId;
             jobForUpdate.OpeningTime = job.OpeningTime;
             jobForUpdate.ClosingTime = job.ClosingTime;
             jobForUpdate.IsActive = job.IsActive;

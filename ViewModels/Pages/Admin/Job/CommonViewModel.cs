@@ -129,7 +129,7 @@ namespace ViewModels.Pages.Admin.Job
         // **********
         [Display(
         ResourceType = typeof(Resources.DataDictionary),
-        Name = nameof(Resources.DataDictionary.OwnerId))]
+        Name = nameof(Resources.DataDictionary.Owner))]
         public Guid OwnerId { get; set; }
         // **********
 

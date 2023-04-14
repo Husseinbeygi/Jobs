@@ -113,7 +113,11 @@
 
             <section-form-field>
                 <label asp-for="ViewModel.OwnerId"></label>
-                <input asp-for="ViewModel.OwnerId" />
+                <select class="form-select" asp-for="ViewModel.OwnerId"
+                        asp-items="@(new SelectList(Model.owners,
+						nameof(ViewModels.Shared.KeyValueViewModel.Id),
+						nameof(ViewModels.Shared.KeyValueViewModel.Name)))">
+                </select>
                 <span asp-validation-for="ViewModel.OwnerId"></span>
             </section-form-field>
 

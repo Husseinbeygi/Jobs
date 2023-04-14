@@ -11,6 +11,7 @@ using System.Linq;
 using Application.CategoryApp;
 using Framework.OperationResult;
 using Domain.CategoryAgg;
+using Application.OwnerApp;
 
 namespace Server.Pages.Admin.Jobs;
 
@@ -19,11 +20,12 @@ namespace Server.Pages.Admin.Jobs;
 public class DeleteModel : Infrastructure.BasePageModel
 {
     public DeleteModel(ILogger<DeleteModel> logger, IJobApplication jobApplication,
-                       ICategoryApplication categoryApplication)
+                       ICategoryApplication categoryApplication, IOwnerApplication ownerApplication)
     {
         Logger = logger;
         JobApplication = jobApplication;
         CategoryApplication = categoryApplication;
+        OwnerApplication = ownerApplication;
         ViewModel = new();
     }
 
@@ -33,7 +35,11 @@ public class DeleteModel : Infrastructure.BasePageModel
 
     private ICategoryApplication CategoryApplication { get; }
 
+    private IOwnerApplication OwnerApplication { get; }
+
     public OperationResultWithData<ViewModels.Pages.Admin.Categories.DetailsViewModel> category { get; set; }
+
+    public OperationResultWithData<ViewModels.Pages.Admin.Owner.CommonViewModel> owner { get; set; }
 
     [BindProperty]
     public DetailsViewModel ViewModel { get; private set; }
@@ -61,6 +67,8 @@ public class DeleteModel : Infrastructure.BasePageModel
             }
 
             category = await CategoryApplication.GetCategory(ViewModel.CategoryId);
+
+            owner = await OwnerApplication.GetOwner(ViewModel.OwnerId);
 
             return Page();
         }
@@ -105,7 +113,7 @@ public class DeleteModel : Infrastructure.BasePageModel
 
             var successMessage = string.Format
                 (Resources.Messages.Successes.Deleted,
-                Resources.DataDictionary.User);
+                Resources.DataDictionary.Job);
 
             AddToastSuccess(message: successMessage);
 
