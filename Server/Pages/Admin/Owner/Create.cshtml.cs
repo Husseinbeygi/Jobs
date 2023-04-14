@@ -21,7 +21,7 @@ public class CreateModel : Infrastructure.BasePageModel
     [BindProperty]
     public CommonViewModel ViewModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public async Task<IActionResult> OnPostAsync()
     {
         if (ModelState.IsValid == false)
         {
