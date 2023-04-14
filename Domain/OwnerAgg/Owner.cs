@@ -13,6 +13,12 @@ namespace Domain.OwnerAgg
     IEntityHasUpdateDateTime
 
     {
+
+        public Owner()
+        {
+            UpdateDateTime = InsertDateTime;
+        }
+
         // **********
         public bool IsActive { get; set; }
         // **********
