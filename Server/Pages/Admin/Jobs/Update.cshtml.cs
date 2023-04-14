@@ -1,12 +1,14 @@
 using Application.JobApp;
 using Application.UserApp;
 using Domain.CategoryAgg;
+using Domain.OwnerAgg;
 using Domain.SeedWork;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Threading.Tasks;
 using ViewModels.Pages.Admin.Job;
 using ViewModels.Shared;
@@ -18,13 +20,16 @@ namespace Server.Pages.Admin.Jobs;
 public class UpdateModel : Infrastructure.BasePageModel
 {
     public UpdateModel(ILogger<UpdateModel> logger,
-        IJobApplication jobApplication, ICategoryRepository categoryRepository)
+        IJobApplication jobApplication, ICategoryRepository categoryRepository,
+        IOwnerRepository ownerRepository)
     {
         Logger = logger;
         JobApplication = jobApplication;
         CategoryRepository = categoryRepository;
+        OwnerRepository = ownerRepository;
         ViewModel = new();
         categories = new();
+        owners = new();
     }
 
     private ILogger<UpdateModel> Logger { get; }
@@ -33,7 +38,11 @@ public class UpdateModel : Infrastructure.BasePageModel
 
     private ICategoryRepository CategoryRepository { get; }
 
+    private IOwnerRepository OwnerRepository { get; }
+
     public List<KeyValueViewModel> categories { get; set; }
+
+    public List<KeyValueViewModel> owners { get; set; }
 
     [BindProperty]
     public int hour_open { get; set; }
@@ -59,6 +68,16 @@ public class UpdateModel : Infrastructure.BasePageModel
             {
                 Id = category.Id,
                 Name = category.Name,
+            });
+        }
+
+        var Owners = await OwnerRepository.GetAllAsync();
+        foreach (var owner in Owners)
+        {
+            owners.Add(new KeyValueViewModel()
+            {
+                Id = owner.Id,
+                Name = owner.LName,
             });
         }
 
@@ -129,7 +148,7 @@ public class UpdateModel : Infrastructure.BasePageModel
 
             var successMessage = string.Format
                 (Resources.Messages.Successes.Updated,
-                Resources.DataDictionary.User);
+                Resources.DataDictionary.Job);
 
             AddToastSuccess(message: successMessage);
 

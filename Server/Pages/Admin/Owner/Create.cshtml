@@ -1,0 +1,65 @@
+﻿@page
+@model Server.Pages.Admin.Owner.CreateModel
+@{
+	var pageTitle =
+	$"{Resources.ButtonCaptions.Create} {Resources.DataDictionary.Owner}";
+
+	ViewData[Infrastructure.ViewDataKeyNames.PageTitle] = pageTitle;
+
+	Layout = "Layouts/Admin/Rtl/_Layout";
+}
+
+
+<form method="post">
+
+	<section-form>
+		<fieldset>
+			<section-form-header>
+				@(pageTitle)
+			</section-form-header>
+
+			<partial name="PartialViews/_DisplayPageMessages" />
+
+			<section-form-field>
+				<label asp-for="ViewModel.FName"></label>
+				<input asp-for="ViewModel.FName" />
+				<span asp-validation-for="ViewModel.FName"></span>
+			</section-form-field>
+
+			<section-form-field>
+				<label asp-for="ViewModel.LName"></label>
+				<input asp-for="ViewModel.LName" />
+				<span asp-validation-for="ViewModel.LName"></span>
+			</section-form-field>
+
+			<section-form-field>
+				<label asp-for="ViewModel.PhoneNumber"></label>
+				<input asp-for="ViewModel.PhoneNumber" />
+				<span asp-validation-for="ViewModel.PhoneNumber"></span>
+			</section-form-field>
+
+			<section-form-check>
+				<input asp-for="ViewModel.IsActive" />
+				<label asp-for="ViewModel.IsActive"></label>
+			</section-form-check>
+
+			<section-form-check>
+				<input asp-for="ViewModel.IsUndeletable" />
+				<label asp-for="ViewModel.IsUndeletable"></label>
+			</section-form-check>
+
+		</fieldset>
+
+		<section-form-buttons>
+			<button-create />
+			<button-reset />
+		</section-form-buttons>
+
+		<section-form-footer>
+			<a asp-page="Index">
+				@(Html.DtatGetLinkCaptionForList())
+			</a>
+		</section-form-footer>
+	</section-form>
+
+</form>

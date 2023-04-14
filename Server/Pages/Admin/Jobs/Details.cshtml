@@ -55,8 +55,13 @@
 		</section-form-field>
 
 		<section-form-field>
-				<label asp-for="ViewModel.CategoryId"></label>
+			<label asp-for="ViewModel.CategoryId"></label>
 			<input asp-for="@(Model.category.Data.Name)" />
+		</section-form-field>
+
+		<section-form-field>
+			<label asp-for="ViewModel.OwnerId"></label>
+			<input asp-for="@(Model.owner.Data.LName)" />
 		</section-form-field>
 
 		<section-form-field>

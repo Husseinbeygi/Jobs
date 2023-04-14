@@ -673,6 +673,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Job Id.
+        /// </summary>
+        public static string JobId {
+            get {
+                return ResourceManager.GetString("JobId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to JobName.
         /// </summary>
         public static string JobName {
@@ -687,15 +696,6 @@ namespace Resources {
         public static string Jobs {
             get {
                 return ResourceManager.GetString("Jobs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Job Id.
-        /// </summary>
-        public static string JobId {
-            get {
-                return ResourceManager.GetString("JobId", resourceCulture);
             }
         }
         
@@ -907,11 +907,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Owner.
+        /// </summary>
+        public static string Owner {
+            get {
+                return ResourceManager.GetString("Owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OwnerId.
         /// </summary>
         public static string OwnerId {
             get {
                 return ResourceManager.GetString("OwnerId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owners.
+        /// </summary>
+        public static string Owners {
+            get {
+                return ResourceManager.GetString("Owners", resourceCulture);
             }
         }
         

@@ -49,6 +49,11 @@
 		</section-form-field>
 
 		<section-form-field>
+			<label asp-for="ViewModel.OwnerId"></label>
+			<input asp-for="@(Model.owner.Data.LName)" />
+		</section-form-field>
+
+		<section-form-field>
 			<label asp-for="ViewModel.OpeningTime"></label>
 			<div class="row">
 				<div class="col-6">

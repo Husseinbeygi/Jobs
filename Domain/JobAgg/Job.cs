@@ -1,4 +1,5 @@
-﻿using Domain.SeedWork;
+﻿using Domain.OwnerAgg;
+using Domain.SeedWork;
 using Resources.Messages;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -187,6 +188,7 @@ namespace Domain.JobAgg
 
         // **********
         public Guid OwnerId { get; set; }
+        public Owner Owner { get; set; }
         // **********
     }
 }
